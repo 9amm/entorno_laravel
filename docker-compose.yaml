@@ -11,9 +11,8 @@ services:
     volumes:
       # montamos el archivo de configuracion en el que cambiamos el document root de apache
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
-      - ./web:/var/www/web
+      - ./proyecto:/var/www/proyecto
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
-      - sesion_php:/tmp
 
 
 
