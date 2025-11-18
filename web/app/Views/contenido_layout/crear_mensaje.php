@@ -1,0 +1,29 @@
+
+<form method="post" action="/messages" class="form-crear-mensaje">
+    <label for="asignatura">Asignatura</label>
+    <select required name="id_asignatura" id="asignatura">
+        <option value="">--Selecciona asignatura--</option>
+        <?foreach($asignaturas as $asignatura):?>
+        <option value="<?=htmlspecialchars($asignatura->id)?>"><?=htmlspecialchars($asignatura->nombre)?></option>
+        <?endforeach;?>
+
+    </select>
+    
+    <label for="contenido-mensaje">Mensaje</label>
+    <textarea required minlength="1" maxlength="280" placeholder="Escribe aqui tu mensaje..." name="mensaje" id="contenido-mensaje"></textarea>
+    <p id="contador-caracteres">0/280</p>
+
+    <input id="boton-publicar-mensaje" class="boton" type="submit" value="Publicar">
+</form>
+
+<script>
+    const LONGITUD_MAXIMA_CARACTERES = 280;
+
+    const textareaMensaje = document.getElementById("contenido-mensaje");
+    const contadorCaracteres = document.getElementById("contador-caracteres");
+
+    textareaMensaje.addEventListener("input", () => {
+        let caracteresEscritos = textareaMensaje.value.length;
+        contadorCaracteres.textContent = `${caracteresEscritos}/${LONGITUD_MAXIMA_CARACTERES}`
+    })
+</script>

@@ -1,0 +1,61 @@
+
+<form class="contenedor-sesion" action="/register" method="post">
+
+    <h1>Registrarse</h1>
+    <label for="rol">Rol</label>
+    <select name="rol" id="rol" required>
+        <option value="alumno" selected>Alumno</option>
+        <option value="profesor">Profesor</option>
+    </select>
+
+    <label for="nombre">Nombre</label>
+    <input required type="text" name="nombre" id="nombre" pattern="^\w{2,30}$" minlength="2" maxlength="30" placeholder="Nombre" autocomplete="off">
+    
+    <label for="email">Email</label>
+    <input required type="text" name="email" pattern="[a-zA-Z0-9_]{1,25}@[a-z0-9]{1,25}\.[a-z]{1,10}$" id="email" placeholder="Email" autocomplete="off">
+
+    <label for="pass">Contraseña</label>
+    <input id="pass1" oninput="validarContasenas()" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])([a-zA-Z!@#$&*]{8,64})$" minlength="8" maxlength="64" required type="password" name="pass" placeholder="Contraseña" autocomplete="off">
+
+    <input id="pass2" oninput="validarContasenas()" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])([a-zA-Z!@#$&*]{8,64})$" minlength="8" maxlength="64" required type="password" placeholder="Repita contraseña" autocomplete="off">
+
+
+
+
+    <p id="formulario-mensaje-error"></p>
+    <input id="boton-registrarse" class="boton" type="submit" value="Registrarse">
+
+    <script>
+        const pass1 = document.getElementById("pass1");
+        const pass2 = document.getElementById("pass2");
+        const mensajeError = document.getElementById("formulario-mensaje-error");
+        const botonRegistrarse = document.getElementById("boton-registrarse");
+
+        function validarContasenas() {
+            if(!cumpleFormato(pass1.value) && !cumpleFormato(pass2.value)) {
+                mensajeError.textContent = "La contraseña tiene que tener mínimo 8 caráceteres, una mayúscula y un caracter especial: !@#$&*";
+
+            } else if(pass1.value != pass2.value){
+                let mensajeContrasenasNoCoinciden = "Las contraseñas no coinciden";
+                mensajeError.textContent = mensajeContrasenasNoCoinciden;
+                botonRegistrarse.setAttribute("disabled", "")
+                pass1.setCustomValidity(mensajeContrasenasNoCoinciden);
+                pass2.setCustomValidity(mensajeContrasenasNoCoinciden);
+
+            } else {
+                mensajeError.textContent = "";
+                botonRegistrarse.removeAttribute("disabled", "")
+                pass1.setCustomValidity("");
+                pass2.setCustomValidity("");
+            }
+        }
+
+        function cumpleFormato(contrasena) {
+            return /^(?=.*[A-Z])(?=.*[!@#$&*])([a-zA-Z!@#$&*]{8,64})$/.test(contrasena);
+        }
+    </script>
+
+
+    <p>¿Ya tienes cuenta? <a href="/login">Iniciar Sesión</a></p>
+
+</form>

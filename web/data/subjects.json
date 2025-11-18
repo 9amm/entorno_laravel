@@ -1,0 +1,17 @@
+{
+    "ultimoId": 4,
+    "asignaturas": {
+        "1": {
+            "id": 1,
+            "nombre": "Bases de datos"
+        },
+        "2": {
+            "id": 2,
+            "nombre": "Sistemas"
+        },
+        "4": {
+            "id": 4,
+            "nombre": "Desarrollo interfaces"
+        }
+    }
+}

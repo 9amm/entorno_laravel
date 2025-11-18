@@ -1,0 +1,19 @@
+{
+    "ultimoId": 4,
+    "usuarios": {
+        "1": {
+            "id": 1,
+            "nombre": "paco",
+            "email": "paco@paco.com",
+            "passHasheada": "$2y$12$Y3qfUy5LpWWJRKN\/U\/TKHe.4hkDXTNm8knekyPP8UsjsOBOGIQCv2",
+            "rol": "alumno"
+        },
+        "4": {
+            "id": 4,
+            "nombre": "paco_holaqu",
+            "email": "a@a.com",
+            "passHasheada": "$2y$12$IKsTxE7mZwvVlFsv6.hKn.kP0EuGJd7Dxer0FZyw4h8CrwkEbAA0m",
+            "rol": "profesor"
+        }
+    }
+}
