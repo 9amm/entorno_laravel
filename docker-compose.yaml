@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       # a partir de una imagen personalizada con mysqli instalado
-      dockerfile: php_apache.Dockerfile
+      dockerfile: php_apache_laravel.Dockerfile
     ports:
       - 80:80
     volumes:

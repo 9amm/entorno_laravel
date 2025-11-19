@@ -18,7 +18,7 @@ COPY --from=composer:2.9.1 /usr/bin/composer /usr/bin/composer
 #copiar todo el codigo del proyecto en la imagen
 COPY ./proyecto /var/www/proyecto/
 
-#cambiar permisos apache
+#cambiar el propietario a www-data
 RUN chown -R www-data /var/www/proyecto/
 RUN composer install
     #chown -R www-data:www-data  ...
