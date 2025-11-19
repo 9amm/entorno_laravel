@@ -6,12 +6,21 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/proyecto
 
-#instalar composer
+#instalar dependencias composer
 RUN apt update -y \
-    && apt install wget \
-    && apt install unzip \
-    && wget https://raw.githubusercontent.com/composer/getcomposer.org/f3108f64b4e1c1ce6eb462b159956461592b3e3e/web/installer -O - -q | php -- --quiet
+    && apt install wget -y\
+    && apt install unzip -y\
+    && apt install git -y
 
+#instalar composer
+COPY --from=composer:2.9.1 /usr/bin/composer /usr/bin/composer
+
+#copiar todo el codigo del proyecto en la imagen
+COPY ./proyecto /var/www/proyecto/
+
+#cambiar permisos apache
+RUN chown -R www-data /var/www/proyecto/
+RUN composer install
     #chown -R www-data:www-data  ...
 
 # debug

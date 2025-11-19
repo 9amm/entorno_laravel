@@ -1,7 +1,7 @@
 version: '3'
 services:
   php_apache:
-    container_name: php_apache
+    container_name: php_apache_laravel
     build: 
       context: .
       # a partir de una imagen personalizada con mysqli instalado
@@ -12,6 +12,7 @@ services:
       # montamos el archivo de configuracion en el que cambiamos el document root de apache
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./proyecto:/var/www/proyecto:cached
+      - /var/www/proyecto/vendor
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
 
 
