@@ -11,7 +11,7 @@
             "port": 9003,
             "pathMappings": {
                 //TODO:  hacer que se puedan debuggear archivos de fuera de publico/
-                "/var/www/web": "${workspaceFolder}/proyecto"
+                "/var/www/proyecto": "${workspaceFolder}/proyecto"
 
             },
             "log": true
