@@ -13,8 +13,6 @@ services:
       - ./proyecto:/var/www/proyecto:cached
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
 
-    #command: php artisan migrate --force
-
 
 volumes:
   sesion_php:
