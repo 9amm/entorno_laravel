@@ -12,7 +12,3 @@ services:
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./proyecto:/var/www/proyecto:cached
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
-
-
-volumes:
-  sesion_php:
