@@ -20,8 +20,6 @@ COPY ./proyecto /var/www/proyecto/
 
 #cambiar el propietario a www-data
 RUN chown -R www-data /var/www/proyecto/
-RUN composer install
-    #chown -R www-data:www-data  ...
 
 # debug
 RUN pecl install xdebug-3.4.5 && docker-php-ext-enable xdebug

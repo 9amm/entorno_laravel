@@ -11,11 +11,4 @@ services:
       # montamos el archivo de configuracion en el que cambiamos el document root de apache
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./proyecto:/var/www/proyecto:cached
-      - /var/www/proyecto/vendor
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
-
-    #command: php artisan migrate --force
-
-
-volumes:
-  sesion_php:
