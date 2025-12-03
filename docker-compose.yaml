@@ -1,5 +1,6 @@
 services:
   php_apache:
+    user: "1000:1000"
     container_name: php_apache_laravel
     build: 
       context: .
