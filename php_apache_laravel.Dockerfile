@@ -21,5 +21,9 @@ COPY ./proyecto /var/www/proyecto/
 #cambiar el propietario a www-data
 RUN chown -R www-data /var/www/proyecto/
 
+#instalar doxygen para generar documentacion
+RUN apt install -y doxygen && apt install -y graphviz
+
+
 # debug
 RUN pecl install xdebug-3.4.5 && docker-php-ext-enable xdebug
