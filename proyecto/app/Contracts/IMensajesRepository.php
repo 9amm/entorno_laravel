@@ -32,6 +32,7 @@ interface IMensajesRepository {
      * @see EstadosMensaje
      */
     function getByEstado(string $estado): array;
+
     /**
      * devuelve los mensajes que tienen un estado incluido en en una lista
      * de estados que se pasan como parametro
@@ -44,10 +45,8 @@ interface IMensajesRepository {
      * @return array una lista con los mensajes que tienen de estado alguno
      * de los estados que se pasan como parametro
      */
-
-
-
     function getByEstados(array $estados): array;
+
     /**
      * a partir del id de una asignatura devuelve un array con todos los mensajes
      * que existen sobre esa asignatura, sin importar su estado

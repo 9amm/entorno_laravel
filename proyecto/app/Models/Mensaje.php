@@ -1,6 +1,7 @@
 <?php
 	
 namespace App\Models;
+use App\Utils\Utils;
 
 class EstadosMensaje {
     public const string PUBLICADO = "publicado";
@@ -56,22 +57,6 @@ class Mensaje {
             }
         }
         return false;
-    }
-
-    /**
-     * Devuelve el usuario que creo el mensaje
-     */
-    function getUsuario(): ?User {
-        return new UsersJsonRepository()->getById($this->idUsuario);
-    }
-
-    /**
-     * @return ?Asignatura devuelve la asignatura sobre la que se ha creado el
-     * mensaje, puede devolver null, por ejemplo si se ha elminado la asignatura
-     * y este mensaje sigue guardando su id
-     */
-    function getAsignatura(): ?Asignatura {
-        return new AsignaturasJsonRepository()->getById($this->idAsignatura);
     }
 
 
