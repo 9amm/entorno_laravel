@@ -1,24 +1,27 @@
 <?php
 
+
+namespace App\Repositories;
+
 class JsonDb {
     /**
      * Guardamos las rutas de los archivos contra los que vamos a
      * estar trabajando para luego poder pasarselas como parametro al constructor
      */
-    public const string USUARIOS = DIR_BASE."data/users.json";
-    public const string MENSAJES = DIR_BASE."data/mensajes.json";
-    public const string ASIGNATURAS = DIR_BASE."data/subjects.json";
+    public const string USUARIOS = "users.json";
+    public const string MENSAJES = "mensajes.json";
+    public const string ASIGNATURAS = "subjects.json";
 
     private string $rutaArchivo;
 
 
 
-    function __construct(string $rutaArchivo) {
-        $this->rutaArchivo = $rutaArchivo;
+    function __construct(string $nombreArchivo) {
+        $this->rutaArchivo = storage_path("app/private/". $nombreArchivo);
 
         //si el archivo solicitado no existe lo creamos vacio
-        if(!file_exists($rutaArchivo)) {
-            file_put_contents($rutaArchivo, "");
+        if(!file_exists($this->rutaArchivo)) {
+            file_put_contents($this->rutaArchivo, "");
         }
 
         $contenidoArchivo = $this->leer();

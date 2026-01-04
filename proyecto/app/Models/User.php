@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class Rol {
     /**
      * aqui era mejor usar un enum pero json_decode no los soporta ademas en 

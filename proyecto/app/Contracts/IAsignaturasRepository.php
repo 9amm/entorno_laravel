@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Contracts;
+use App\Models\Asignatura;
+
 interface IAsignaturasRepository {
 
     function getAll(): array ;

@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Repositories;
+
+use App\Contracts\IUsersRepository;
+use App\Models\User;
+
 
 class UsersJsonRepository implements IUsersRepository{
     private JsonDb $archivoUsuarios;

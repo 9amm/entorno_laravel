@@ -1,5 +1,11 @@
 <?php
 
+
+namespace App\Repositories;
+use App\Contracts\IAsignaturasRepository;
+use App\Models\Asignatura;
+
+
 class AsignaturasJsonRepository implements IAsignaturasRepository{
     private JsonDb $archivoAsignaturas;
 

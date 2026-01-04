@@ -1,5 +1,6 @@
 <?php
 	
+namespace App\Models;
 
 class EstadosMensaje {
     public const string PUBLICADO = "publicado";

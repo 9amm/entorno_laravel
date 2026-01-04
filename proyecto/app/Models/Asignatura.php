@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models;
+
+use IMensajesRepository;
+use MensajesJsonRepository;
+
 class Asignatura {
     public ?int $id;
     public string $nombre;
@@ -15,7 +20,7 @@ class Asignatura {
      * sin importar su estado
      */
     function getMensajes(): array {
-        return new MensajesJsonRepository()->getByAsignatura($this->id);
+        return $this->repositorio->getByAsignatura($this->id);
     }
 
     /**

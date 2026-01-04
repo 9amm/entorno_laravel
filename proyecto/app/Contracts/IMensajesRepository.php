@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Contracts;
+use App\Models\Mensaje;
+use App\Models\User;
+
 interface IMensajesRepository {
 
     /**

@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Repositories;
+
+use App\Contracts\IMensajesRepository;
+use App\Models\Mensaje;
+use App\Models\User;
+
 
 class MensajesJsonRepository implements IMensajesRepository{
     private JsonDb $archivoMensajes;
