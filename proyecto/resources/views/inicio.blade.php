@@ -12,5 +12,7 @@
         Inicio
     </x-topbar>
 
+    <x-info-usuario-logueado nombre="Paco" rol="Profesor">
+    </x-info-usuario-logueado>
 
 @endsection
