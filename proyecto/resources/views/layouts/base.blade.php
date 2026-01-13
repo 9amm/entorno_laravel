@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield("titulo", "Red social")</title>
     <link rel="stylesheet" href="/recursos/estilos.css">
-    <script src="/recursos/js/modo_oscuro.js"></script>
+    <script src="/recursos/js/principal.js"></script>
 </head>
 
 <body>
