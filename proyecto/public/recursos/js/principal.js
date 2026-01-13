@@ -67,3 +67,16 @@ async function rejectMessage(boton) {
     await enviarPost(ruta);
     location.reload();
 }
+
+
+//LOGOUT
+async function enviarPeticionLogout() {
+    await fetch("/logout", {method: "POST"});
+    location.reload();
+}
+
+async function logout() {
+    if(confirm("¿Cerrar sesión?")) {
+        await enviarPeticionLogout();
+    }
+}

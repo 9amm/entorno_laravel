@@ -3,16 +3,13 @@
 
 @section('contenido')
 
+<x-sidebar nombre="paco" rol="profesor" esProfesor="false"></x-sidebar>
 
+<x-contenido-principal titulo="aa">
+    <h1>si</h1>
     <x-mensaje id-mensaje="22" usuario="paco" asignatura="bd" fecha="hoy">
-        esto es contenido
+        soy paco
     </x-mensaje>
-
-    <x-topbar>
-        Inicio
-    </x-topbar>
-
-    <x-info-usuario-logueado nombre="Paco" rol="Profesor">
-    </x-info-usuario-logueado>
+</x-contenido-principal>
 
 @endsection
