@@ -1,5 +1,5 @@
 @props([
-    "id-mensaje",
+    "idMensaje",
     "asignatura",
     "fecha",
     "usuario",
