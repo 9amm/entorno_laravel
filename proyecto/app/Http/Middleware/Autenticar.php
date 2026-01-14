@@ -25,7 +25,12 @@ class Autenticar {
         $respuesta = null;
 
         if(!$authController->usuarioEstaLogueado()) {
-            $respuesta = redirect()->route("login");
+            $rutaCompletaSolicitada = $request->url();
+            //no esta logeado asi que no puede acceder pero de todas formas
+            //vamos a guardar la ruta a la que queria entrar para luego poder
+            //enviarlo de vuelva si se loguea
+            $request->session()->put("origenRedireccion", $rutaCompletaSolicitada);
+            $respuesta = redirect()->route("login_formulario");
         } else {
             $respuesta = $next($request);
         }

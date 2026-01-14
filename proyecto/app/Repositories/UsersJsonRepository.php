@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\IUsersRepository;
 use App\Models\User;
-
+use App\Repositories\JsonDb;
 
 class UsersJsonRepository implements IUsersRepository{
     private JsonDb $archivoUsuarios;
