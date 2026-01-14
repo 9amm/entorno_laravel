@@ -1,0 +1,13 @@
+@props([
+    "nombre",
+    "rol",
+])
+
+<div class="contenedor-cuenta">
+    <div class="usuario">
+        <p>{{ $nombre }}</p>
+        <p>{{ $rol }}</p>
+    </div>
+
+    <button id="boton-logout" title="Cerrar sesión" onclick="logout()"></button>
+</div>

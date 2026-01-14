@@ -155,18 +155,20 @@ select{
     gap: 10px;
 }
 
-.contenedor-cuenta > .usuario {
+
+.usuario {
     border-radius: var(--radius);
     padding: 10px;
     width: 100%;
     cursor: pointer;
     font-style: italic;
     transition: all 0.4s;
+    &:hover {
+        background-color: var(--fondo-hover);
+    }
 }
 
-.contenedor-cuenta > .usuario:hover {
-    background-color: var(--fondo-hover);
-}
+
 
 .contenedor-cuenta p {
     margin: 0;
