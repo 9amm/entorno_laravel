@@ -10,9 +10,10 @@
     @foreach($mensajes as $mensaje)
     <x-mensaje 
         idMensaje="{{$mensaje->id}}"
-        asignatura="nombreasignatura"
-        fecha="2348/87234/342"
-        usuario="paco"
+        {{-- asignatura="{{$mensaje->getAsignatura()->nombre}}" --}}
+        asignatura="hola"
+        fecha="{{$mensaje->getFechaCreacionFormateada()}}"
+        usuario="{{$mensaje->getUsuario()->nombre}}"
         :haSidoModerado="true"
     >
         {{$mensaje->contenido}}
