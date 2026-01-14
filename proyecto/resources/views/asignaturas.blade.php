@@ -5,7 +5,7 @@
     <x-sidebar nombre="{{$nombreUsuario}}" rol="{{$rol}}" es-profesor="{{$esProfesor}}"></x-sidebar>
     <x-contenido-principal titulo="Asignaturas">
         @foreach($asignaturas as $asignatura)
-            <x-tarjeta-asignatura idAsignatura={{$asignatura->id}}>
+            <x-tarjeta-asignatura idAsignatura="{{$asignatura->id}}">
                 {{$asignatura->nombre}}
             </x-tarjeta-asignatura>
         @endforeach
