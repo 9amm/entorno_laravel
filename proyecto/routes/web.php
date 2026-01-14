@@ -23,5 +23,8 @@ Route::get('/', function () {
         ]
     ];
 
-    return view("asignaturas", $datos);
+    return view("inicio");
 });
+
+//cuando la ruta no se encuentre mostramos pagina de 404
+Route::fallback(fn() => view('no_encontrado'));
