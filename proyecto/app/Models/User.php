@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Models;
+use App\Repositories\MensajesJsonRepository;
 
 class Rol {
     /**
@@ -52,6 +52,11 @@ class User {
     }
 
 
+    /**
+     * Devuelve todos los mensajes que ha publicado un usuario
+     */
+    function getMensajes(): array {
+      return new MensajesJsonRepository()->getByUser($this);
+    }
 }
-
 ?>
