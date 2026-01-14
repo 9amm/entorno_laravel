@@ -1,23 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 use App\Models\Mensaje;
 use App\Models\EstadosMensaje;
+use App\Repositories\MensajesJsonRepository;
 
 Route::get('/', function () {
 
-    $usuarioPrueba = new User("a", "b", "c", "d");
-    $mensajes = [
-        new Mensaje("hola que tal", 2, 2, EstadosMensaje::PUBLICADO, 1, 2),
-        new Mensaje("pruebaaa", 2, 2, EstadosMensaje::PUBLICADO, 1, 2),
-        // (string $contenido, int $idAsignatura, int $idUsuario, string $estadoMensaje, int $timestampCreacion, ?int $id )
-    ];
+    $repo = new MensajesJsonRepository();
+    $repo->save(new Mensaje("pruebaaa", 2, 1, EstadosMensaje::PELIGROSO, 1, 1));
+    $mensajes = $repo->getAll();
+
     $datos = [
         "nombreUsuario" => "paco",
-        "rol" => "si",
-        "esProfesor" => false,
-        "mensajes" => $mensajes,
+        "rol" => "hola",
+        "esProfesor" => "true",
+        "asignaturas" => $mensajes,
     ];
-    return view('inicio', $datos);
+
+    //print_r(EstadosMensaje::PELIGROSO);
+    return view('moderacion', $datos);
 });
