@@ -1,5 +1,5 @@
 @props([
-    "titulo"
+    "titulo" => ""
 ])
 
 <article>
