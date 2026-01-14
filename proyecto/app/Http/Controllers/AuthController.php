@@ -17,7 +17,7 @@ class AuthController extends Controller {
 
     function getUsuarioLogeado(): ?User {
         $idUsuario = $_SESSION["idUsuario"] ?? "";
-        return new $this->userRepository->getById($idUsuario);
+        return $this->userRepository->getById($idUsuario);
     }
 
     function usuarioEstaLogueado(): bool {
