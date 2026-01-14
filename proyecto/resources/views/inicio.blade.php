@@ -8,16 +8,15 @@
 <x-contenido-principal titulo="Inicio">
 
     @foreach($mensajes as $mensaje)
-    <x-mensaje 
-        idMensaje="{{$mensaje->id}}"
-        {{-- asignatura="{{$mensaje->getAsignatura()->nombre}}" --}}
-        asignatura="hola"
-        fecha="{{$mensaje->getFechaCreacionFormateada()}}"
-        usuario="{{$mensaje->getUsuario()->nombre}}"
-        :haSidoModerado="true"
-    >
-        {{$mensaje->contenido}}
-    </x-mensaje>
+        <x-mensaje 
+            idMensaje="{{$idMensaje}}"
+            asignatura="{{$nombreAsignatura}}"
+            fecha="{{$fecha}}"
+            usuario="{{$nombreUsuario}}"
+            :haSidoModerado="true"
+        >
+            {{$contenidoMensaje}}
+        </x-mensaje>
     @endforeach
 
 
