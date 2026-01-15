@@ -54,17 +54,33 @@ async function enviarPost(ruta) {
     let peticion = await fetch(ruta, {method: "POST"})
 }
 
+function getCsrfToken(botonAprobarORechazar) {
+    return botonAprobarORechazar.parentElement.getAttribute("csrf-token");
+}
+
+
+//TODO: codigo muy parecido, guardar url en el boton?
 async function approveMessage(boton) {
     let idMensaje = getIdMensaje(boton);
     ruta = `/moderation/${idMensaje}/approve`;
-    await enviarPost(ruta);
+    let peticion = await fetch(ruta, {
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': getCsrfToken(boton)
+        }
+    })
     location.reload();
 }
 
 async function rejectMessage(boton) {
     let idMensaje = getIdMensaje(boton);
     ruta = `/moderation/${idMensaje}/reject`;
-    await enviarPost(ruta);
+    let peticion = await fetch(ruta, {
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': getCsrfToken(boton)
+        }
+    })
     location.reload();
 }
 

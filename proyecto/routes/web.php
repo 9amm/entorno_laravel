@@ -3,6 +3,7 @@
 use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ModeracionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\Autenticar;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,15 @@ Route::post('/messages', [MessageController::class, "store"])
     ->name("mensaje_formulario_guardar")
     ->middleware(Autenticar::class);
 
+
+Route::get('/moderation', [ModeracionController::class, "index"])
+    ->name("mensaje_pendientes_moderar")
+    ->middleware(Autenticar::class);
+
+
+Route::post('/moderation/{id}/{accion}', [ModeracionController::class, "moderar"])
+    ->name("mensaje_moderar")
+    ->middleware(Autenticar::class);
 
 
 
