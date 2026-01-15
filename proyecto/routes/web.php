@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
@@ -8,6 +9,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MessageController::class, "index"])
     ->name("inicio")
+    ->middleware(Autenticar::class);
+
+Route::get('/subjects', [AsignaturasController::class, "index"])
+    ->name("asignaturas_listado")
     ->middleware(Autenticar::class);
 
 Route::get('/messages/new', [MessageController::class, "create"])
