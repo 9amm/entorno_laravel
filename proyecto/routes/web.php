@@ -15,6 +15,10 @@ Route::get('/subjects', [AsignaturasController::class, "index"])
     ->name("asignaturas_listado")
     ->middleware(Autenticar::class);
 
+Route::get('/subjects/{id}', [AsignaturasController::class, "show"])
+    ->name("asignaturas_detalle")
+    ->middleware(Autenticar::class);
+
 Route::get('/messages/new', [MessageController::class, "create"])
     ->name("mensaje_formulario_crear")
     ->middleware(Autenticar::class);

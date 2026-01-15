@@ -2,11 +2,11 @@
 
 
 @section("contenido")
-    <x-sidebar nombre="{{$nombreUsuario}}" rol="{{$rol}}" es-profesor="{{$esProfesor}}"></x-sidebar>
+    <x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
 
     <x-contenido-principal titulo="Crear mensaje">
-        <h1>{{$asignatura->nombre}}></h1>
-        <p>{{$numMensajes." ".($numMensajes == 1 ? "mensaje":"mensajes")}}></p>
+        <h1>{{$asignatura->nombre}}</h1>
+        <p>{{$numMensajes." ".($numMensajes == 1 ? "mensaje":"mensajes")}}</p>
 
         @foreach($mensajes as $mensaje)
             <x-mensaje 
@@ -20,6 +20,6 @@
             </x-mensaje>
 
         @endforeach
-    <x-contenido-principal>
+    </x-contenido-principal>
 
 @endsection

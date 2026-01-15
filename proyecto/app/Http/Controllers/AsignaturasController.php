@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\IAsignaturasRepository;
 use App\Models\Asignatura;
+use App\Models\EstadosMensaje;
 use Illuminate\Http\Request;
 
 class AsignaturasController extends Controller {
@@ -50,8 +51,37 @@ class AsignaturasController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(Asignatura $asignatura) {
-        //
+    public function show($idAsignatura, IAsignaturasRepository $repositorioAsignaturas, AuthController $authController) {
+        //buscamos en la bd la asignatura con el id que se pase como parametro
+        $asignatura = $repositorioAsignaturas->getById($idAsignatura);
+        $usuarioLogeado = $authController->getUsuarioLogeado();
+
+        $respuesta = null;
+
+        //si no encontramos ninguna asignatura
+        if($asignatura != null) {
+            //obtenemos todos los mensajes publicados de esa asignatura
+            $mensajes = $asignatura->getMensajesPorEstado(EstadosMensaje::PUBLICADO);
+            //guardamos cuantos mensajes son
+            $numMensajes = sizeof($mensajes);
+
+            $variablesVista = [
+                "asignatura" => $asignatura,
+                "mensajes" => $mensajes,
+                "numMensajes" => $numMensajes,
+                "usuarioLogeado" => $usuarioLogeado,
+            ];
+
+            $respuesta = view("detalle_asignatura", $variablesVista);
+
+        } else {
+            $respuesta = view("error", [
+                "mensaje" => "Asignatura no encontrada",
+                "usuarioLogeado" => $usuarioLogeado,
+            ]);
+        }
+
+        return $respuesta;
     }
 
     /**
