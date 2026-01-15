@@ -23,12 +23,16 @@ class User {
         $this->modoOscuroActivado = $modoOscuroActivado;
     }
 
+    function tieneRol(string $rol) {
+        return $this->rol == $rol;
+    }
+
     function esAlumno(): bool {
-        return $this->rol == Rol::ALUMNO;
+        return $this->tieneRol(Rol::ALUMNO);
     }
 
     function esProfesor(): bool {
-        return $this->rol == Rol::PROFESOR;
+        return $this->tieneRol(Rol::PROFESOR);
     }
 
     function prefiereModoOscuro(): bool {
