@@ -1,16 +1,8 @@
 <?php
 namespace App\Models;
 use App\Repositories\MensajesJsonRepository;
+use App\Models\Rol;
 
-class Rol {
-    /**
-     * aqui era mejor usar un enum pero json_decode no los soporta ademas en 
-     * php los enums se guardan como objetos y esto solo complica las cosas cuando
-     * vayamos a leer desde el archivo json
-    */
-    public const string ALUMNO = "alumno";
-    public const string PROFESOR = "profesor";
-}
 
 
 class User {

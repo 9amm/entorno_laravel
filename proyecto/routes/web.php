@@ -1,13 +1,9 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\Autenticar;
-use App\Models\Asignatura;
 use Illuminate\Support\Facades\Route;
-use App\Models\Mensaje;
-use App\Models\EstadosMensaje;
-use App\Repositories\MensajesJsonRepository;
-use App\Repositories\UsersJsonRepository;
 
 Route::get('/', function () {
     print_r("a");
@@ -18,8 +14,33 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, "show"])
     ->name("login_formulario");
 
+Route::get('/register', [RegisterController::class, "show"])
+    ->name("register_formulario");
+
+Route::post('/register', [RegisterController::class, "register"])
+    ->name("register_post");
+
 Route::post('/login', [LoginController::class, "login"])
     ->name("login_post");
+
+
+//rutas mensajes
+Route::get('/messages', [MessagesController::class, "messages"])
+    ->name("messages_post");
+
+Route::post('/messages/new', [MessagesController::class, "messages"])
+    ->name("messages_post");
+
+//rutas moderacion
+Route::get('/moderation/', [ModerationController::class, "moderation"])
+    ->name("moderation");
+
+Route::post('/moderation/{id}/approve', [ModerationController::class, "moderation"])
+    ->name("moderation_approve");
+
+Route::post('/moderation/{id}/reject', [ModerationController::class, "moderation"])
+    ->name("moderation_reject");
+
 
 //cuando la ruta no se encuentre mostramos pagina de 404
 Route::fallback(fn() => view('no_encontrado'));

@@ -4,6 +4,7 @@
     <script src="/recursos/js/hash.js" defer></script>
 
     <form class="contenedor-sesion" action="/register" method="post">
+        @csrf
 
         <h1>Registrarse</h1>
         <label for="rol">Rol</label>
