@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Contracts\IUsersRepository;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Request;
 
 class AuthController extends Controller {
 
     public IUsersRepository $userRepository;
+    public Request $peticion;
 
-    public function __construct(IUsersRepository $userRepository) {
+    public function __construct(IUsersRepository $userRepository, Request $peticion) {
+        $this->peticion = $peticion;
         $this->userRepository = $userRepository;
     }
 
 
     function getUsuarioLogeado(): ?User {
-        $idUsuario = $_SESSION["idUsuario"] ?? "";
+        $idUsuario = $this->peticion->session()->get('idUsuario', 'default');
         return $this->userRepository->getById($idUsuario);
     }
 
@@ -25,7 +28,7 @@ class AuthController extends Controller {
     }
 
     function setUsuarioLogeado(User $usuario): void {
-        $_SESSION["idUsuario"] = $usuario->id;
+        $this->peticion->session()->put("idUsuario", $usuario->id);
     }
 
 

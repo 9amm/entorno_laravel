@@ -21,7 +21,7 @@ class Autenticar {
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response {
-        $authController = new AuthController($this->repositorioUsuarios);
+        $authController = new AuthController($this->repositorioUsuarios, $request);
         $respuesta = null;
 
         if(!$authController->usuarioEstaLogueado()) {
