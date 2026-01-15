@@ -10,6 +10,17 @@ Route::get('/', [MessageController::class, "index"])
     ->name("inicio")
     ->middleware(Autenticar::class);
 
+Route::get('/messages/new', [MessageController::class, "create"])
+    ->name("mensaje_formulario_crear")
+    ->middleware(Autenticar::class);
+
+Route::post('/messages', [MessageController::class, "store"])
+    ->name("mensaje_formulario_guardar")
+    ->middleware(Autenticar::class);
+
+
+
+
 Route::get('/login', [LoginController::class, "show"])
     ->name("login_formulario");
 
@@ -24,6 +35,7 @@ Route::post('/login', [LoginController::class, "login"])
 
 
 //rutas mensajes
+/*
 Route::get('/messages', [MessagesController::class, "messages"])
     ->name("messages_post");
 
@@ -39,6 +51,7 @@ Route::post('/moderation/{id}/approve', [ModerationController::class, "moderatio
 
 Route::post('/moderation/{id}/reject', [ModerationController::class, "moderation"])
     ->name("moderation_reject");
+ */
 
 
 //cuando la ruta no se encuentre mostramos pagina de 404

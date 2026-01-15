@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\IAsignaturasRepository;
 use App\Contracts\IMensajesRepository;
 use App\Models\EstadosMensaje;
 use App\Models\Mensaje;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MessageController extends Controller
 {
@@ -36,15 +38,91 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
-        //
+    public function create(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController): View {
+        $usuarioLogeado = $authController->getUsuarioLogeado();
+
+        $asignaturas = $repositorioAsignaturas->getAll();
+
+        return view("crear_mensaje", [
+            "usuarioLogeado" => $usuarioLogeado,
+            "asignaturas" => $asignaturas
+        ]);
+
+        //cargarLayout($usuario, "Crear mensaje", "crear_mensaje.php", ["asignaturas" => $asignaturas]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $peticion, AuthController $authController,
+        IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
+
+        $usuarioLogeado = $authController->getUsuarioLogeado();
+
+        $respuesta = null;
+
+        if($usuarioLogeado != null) {
+
+            $idAsignatura = $peticion->input("id_asignatura", "");
+            $contenidoMensaje = $peticion->input("mensaje", "");
+
+            if (empty($idAsignatura) || empty($contenidoMensaje)) {
+                $respuesta = view("error", [
+                    "mensaje" => "Todos los campos son obligatorios.",
+                    "usuarioLogeado" => $usuarioLogeado
+                ]);
+                //cargarLayout($usuarioLogeado, "Error", "mensaje_warning.php", );
+
+            } else if(!Mensaje::tieneLongitudValida($contenidoMensaje)) {
+                $respuesta = view("error", [
+                    "mensaje" => "Longitud del mensaje no valida.",
+                    "usuarioLogeado" => $usuarioLogeado
+                ]);
+            } else {
+                $idAsignturaExiste = $repositorioAsignaturas->getById($idAsignatura) != null;
+
+                if($idAsignturaExiste) {
+                    $idUsuarioLogeado = $usuarioLogeado->id;
+
+                    if(Mensaje::contienePalabrasVetadas($contenidoMensaje)) {
+                        $estado = EstadosMensaje::PELIGROSO;
+
+                        $respuesta = view("error", [
+                            "mensaje" => "Hemos detectado que el mensaje
+                            contiene palabras vetadas, el mensaje queda
+                            pendiente de revisión por parte de un moderador.",
+                            "usuarioLogeado" => $usuarioLogeado
+                        ]);
+                    }else{
+                        $estado = EstadosMensaje::PENDIENTE;   
+                    }
+                    
+                    $mensaje = new Mensaje(
+                        contenido: $contenidoMensaje,
+                        idAsignatura: $idAsignatura,
+                        idUsuario: $idUsuarioLogeado,
+                        estadoMensaje: $estado,
+                        timestampCreacion: time()
+                    );
+                    
+                    //guardamos el mensaje en la bd
+                    $repositorioMensajes->save($mensaje);
+
+                    $respuesta = view("error", [
+                        "mensaje" => "Mensaje creado correctamente, queda pendiente de moderar.",
+                        "usuarioLogeado" => $usuarioLogeado
+                    ]);
+
+                } else {
+                    $respuesta = view("error", [
+                        "mensaje" => "Asignatura no encontrada.",
+                        "usuarioLogeado" => $usuarioLogeado
+                    ]);
+                }
+            }
+        }
+
+        return $respuesta;
     }
 
     /**
