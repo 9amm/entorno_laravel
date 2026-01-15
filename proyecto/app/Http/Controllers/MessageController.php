@@ -86,15 +86,10 @@ class MessageController extends Controller
 
                     if(Mensaje::contienePalabrasVetadas($contenidoMensaje)) {
                         $estado = EstadosMensaje::PELIGROSO;
-
-                        $respuesta = view("error", [
-                            "mensaje" => "Hemos detectado que el mensaje
-                            contiene palabras vetadas, el mensaje queda
-                            pendiente de revisión por parte de un moderador.",
-                            "usuarioLogeado" => $usuarioLogeado
-                        ]);
+                        $mensajeAlerta = "Hemos detectado que el mensaje contiene palabras vetadas, el mensaje queda pendiente de revisión por parte de un moderador.";
                     }else{
                         $estado = EstadosMensaje::PENDIENTE;   
+                        $mensajeAlerta = "Mensaje creado correctamente, queda pendiente de moderar.";
                     }
                     
                     $mensaje = new Mensaje(
@@ -109,7 +104,7 @@ class MessageController extends Controller
                     $repositorioMensajes->save($mensaje);
 
                     $respuesta = view("error", [
-                        "mensaje" => "Mensaje creado correctamente, queda pendiente de moderar.",
+                        "mensaje" => $mensajeAlerta,
                         "usuarioLogeado" => $usuarioLogeado
                     ]);
 
