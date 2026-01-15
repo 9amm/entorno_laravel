@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\Autenticar;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    print_r("a");
-})
+Route::get('/', [MessageController::class, "index"])
     ->name("inicio")
     ->middleware(Autenticar::class);
 

@@ -26,7 +26,6 @@ class JsonDb {
 
         $contenidoArchivo = $this->leer();
         if(!isset($contenidoArchivo["ultimoId"]) || !isset($contenidoArchivo["items"])) {
-            dd($contenidoArchivo);
             $this->escribir([
                 "ultimoId" => 0,
                 "items" => []

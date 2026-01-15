@@ -3,14 +3,9 @@ namespace App\Models;
 use App\Repositories\UsersJsonRepository;
 use App\Repositories\AsignaturasJsonRepository;
 use App\Utils\Utils;
+use App\Models\EstadosMensaje;
 	
 
-class EstadosMensaje {
-    public const string PUBLICADO = "publicado";
-    public const string PENDIENTE = "pendiente";
-    public const string RECHAZADO = "rechazado";
-    public const string PELIGROSO = "peligroso";
-}
 
 
 class Mensaje {

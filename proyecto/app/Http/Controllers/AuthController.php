@@ -19,7 +19,7 @@ class AuthController extends Controller {
 
 
     function getUsuarioLogeado(): ?User {
-        $idUsuario = $this->peticion->session()->get('idUsuario', 'default');
+        $idUsuario = $this->peticion->session()->get("idUsuario", "");
         return $this->userRepository->getById($idUsuario);
     }
 
