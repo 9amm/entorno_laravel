@@ -2,7 +2,8 @@
 
 
 @section("contenido")
-    <x-sidebar nombre="{{$nombreUsuario}}" rol="{{$rol}}" es-profesor="{{$esProfesor}}"></x-sidebar>
+    <x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
+
     <x-contenido-principal titulo="Asignaturas">
         @foreach($asignaturas as $asignatura)
             <x-tarjeta-asignatura idAsignatura="{{$asignatura->id}}">

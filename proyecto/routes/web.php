@@ -1,30 +1,91 @@
 <?php
 
-use App\Models\Asignatura;
+use App\Http\Controllers\AsignaturasController;
+use App\Http\Controllers\Error404NoEncontrado;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ModeracionController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Middleware\Autenticar;
+use App\Http\Middleware\NecesitaRol;
+use App\Http\Middleware\RechazarSiAutenticado;
+use App\Models\Rol;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-use App\Models\Mensaje;
-use App\Models\EstadosMensaje;
-use App\Repositories\MensajesJsonRepository;
 
-Route::get('/', function () {
+Route::get('/', [MessageController::class, "index"])
+    ->name("inicio")
+    ->middleware(Autenticar::class);
 
-    //$repo = new MensajesJsonRepository();
-    //$repo->save(new Mensaje("pruebaaa", 2, 1, EstadosMensaje::PELIGROSO, 1, 1));
-    //$mensajes = $repo->getAll();
+Route::get('/subjects', [AsignaturasController::class, "index"])
+    ->name("asignaturas_listado")
+    ->middleware(Autenticar::class);
 
-    $datos = [
-        "nombreUsuario" => "paco",
-        "rol" => "hola",
-        "esProfesor" => "true",
-        "asignaturas" => [
-            new Asignatura("bd", 1),
-            new Asignatura("sistemas", 2),
-            new Asignatura("desarrollo de interfaces", 3)
-        ]
-    ];
+Route::get('/subjects/{id}', [AsignaturasController::class, "show"])
+    ->name("asignaturas_detalle")
+    ->middleware(Autenticar::class);
 
-    return view("inicio");
-});
+Route::get('/messages/new', [MessageController::class, "create"])
+    ->name("mensaje_formulario_crear")
+    ->middleware(Autenticar::class);
+
+Route::post('/messages', [MessageController::class, "store"])
+    ->name("mensaje_formulario_guardar")
+    ->middleware(Autenticar::class);
+
+
+Route::get('/moderation', [ModeracionController::class, "index"])
+    ->name("mensaje_pendientes_moderar")
+    ->middleware(Autenticar::class)
+    ->middleware(NecesitaRol::class . ":" .Rol::PROFESOR);
+
+
+Route::post('/moderation/{id}/{accion}', [ModeracionController::class, "moderar"])
+    ->name("mensaje_moderar")
+    ->middleware(Autenticar::class)
+    ->middleware(NecesitaRol::class . ":" .Rol::PROFESOR);
+
+
+
+Route::get('/login', [LoginController::class, "show"])
+    ->name("login_formulario")
+    ->middleware(RechazarSiAutenticado::class);
+
+Route::get('/register', [RegisterController::class, "show"])
+    ->name("register_formulario")
+    ->middleware(RechazarSiAutenticado::class);
+
+Route::post('/register', [RegisterController::class, "register"])
+    ->name("register_post")
+    ->middleware(RechazarSiAutenticado::class);
+
+Route::post('/login', [LoginController::class, "login"])
+    ->name("login_post")
+    ->middleware(RechazarSiAutenticado::class);
+
+Route::post('/logout', [LoginController::class, "logout"])
+    ->name("logout");
+
+
+//rutas mensajes
+/*
+Route::get('/messages', [MessagesController::class, "messages"])
+    ->name("messages_post");
+
+Route::post('/messages/new', [MessagesController::class, "messages"])
+    ->name("messages_post");
+
+//rutas moderacion
+Route::get('/moderation/', [ModerationController::class, "moderation"])
+    ->name("moderation");
+
+Route::post('/moderation/{id}/approve', [ModerationController::class, "moderation"])
+    ->name("moderation_approve");
+
+Route::post('/moderation/{id}/reject', [ModerationController::class, "moderation"])
+    ->name("moderation_reject");
+ */
+
 
 //cuando la ruta no se encuentre mostramos pagina de 404
-Route::fallback(fn() => view('no_encontrado'));
+Route::fallback(fn() => abort(404));

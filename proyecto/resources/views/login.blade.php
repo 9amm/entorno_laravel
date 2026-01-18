@@ -4,6 +4,7 @@
     <script src="/recursos/js/hash.js" defer></script>
 
     <form class="contenedor-sesion" method="post" action="/login">
+        @csrf
         <h1>Iniciar sesión</h1>
         <label for="usuario">Usuario</label>
         <input type="text" name="usuario" id="usuario" placeholder="Usuario" autocomplete="off" required>

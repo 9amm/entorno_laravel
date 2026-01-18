@@ -18,8 +18,10 @@
     <p class="mensaje-contenido">{{ $slot }}</p> 
 
     @if(!$haSidoModerado)
-        <button id_mensaje="{{ $idMensaje }}" class="boton" onclick="approveMessage(this)">Aprobar</button>
-        <button id_mensaje="{{ $idMensaje }}" onclick="rejectMessage(this)">Rechazar</button>
+    <div>
+        <button class="boton" onclick="approveMessage({{$idMensaje}})">Aprobar</button>
+        <button onclick="rejectMessage({{$idMensaje}})">Rechazar</button>
+    </div>
     @endif
  
 </section>

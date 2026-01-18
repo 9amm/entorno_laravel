@@ -3,19 +3,19 @@
 
 @section('contenido')
 
-<x-sidebar nombre="{{$nombreUsuario}}" rol="{{$rol}}" es-profesor="{{$esProfesor}}"></x-sidebar>
+<x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
 
 <x-contenido-principal titulo="Inicio">
 
     @foreach($mensajes as $mensaje)
         <x-mensaje 
-            idMensaje="{{$idMensaje}}"
-            asignatura="{{$nombreAsignatura}}"
-            fecha="{{$fecha}}"
-            usuario="{{$nombreUsuario}}"
+            idMensaje="{{$mensaje->id}}"
+            asignatura="{{$mensaje->getAsignatura()->nombre}}"
+            fecha="{{$mensaje->getFechaCreacionFormateada()}}"
+            usuario="{{$mensaje->getUsuario()->nombre}}"
             :haSidoModerado="true"
         >
-            {{$contenidoMensaje}}
+            {{$mensaje->contenido}}
         </x-mensaje>
     @endforeach
 

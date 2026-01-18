@@ -2,10 +2,12 @@
 
 
 @section('contenido')
-    <x-sidebar nombre="{{$nombreUsuario}}" rol="{{$rol}}" es-profesor="{{$esProfesor}}"></x-sidebar>
+    <x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
 
     <x-contenido-principal titulo="Crear mensaje">
         <form method="post" action="/messages" class="form-crear-mensaje">
+            @csrf
+
             <label for="asignatura">Asignatura</label>
             <select required name="id_asignatura" id="asignatura">
                 <option value="">--Selecciona asignatura--</option>

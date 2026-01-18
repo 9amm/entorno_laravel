@@ -17,7 +17,7 @@ class JsonDb {
 
 
     function __construct(string $nombreArchivo) {
-        $this->rutaArchivo = storage_path("app/private/". $nombreArchivo);
+        $this->rutaArchivo = storage_path("app/datos/". $nombreArchivo);
 
         //si el archivo solicitado no existe lo creamos vacio
         if(!file_exists($this->rutaArchivo)) {
