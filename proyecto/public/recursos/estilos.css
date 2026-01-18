@@ -175,6 +175,7 @@ select{
 }
 
 .topbar {
+    height: 69px;
     margin: 0px var(--padding-contenido-neg);
     border-bottom: 1px solid var(--color-borde);
     background-color: var(--fondo);
