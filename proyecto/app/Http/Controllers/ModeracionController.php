@@ -14,26 +14,18 @@ class ModeracionController extends Controller
     public function index(AuthController $authController, IMensajesRepository $repositorioMensajes) {
         $usuarioLogeado = $authController-> getUsuarioLogeado();
         $respuesta = null;
-        if (!$usuarioLogeado->esProfesor()) {
+        $mensajesPendientesModerar = $repositorioMensajes->getByEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO]);
 
+        if(sizeof($mensajesPendientesModerar) == 0) {
             $respuesta = view("error", [
                 "usuarioLogeado" => $usuarioLogeado,
-                ["mensaje" => "No tienes permiso"]
+                "mensaje" => "Aún no hay ningún mensaje para moderar.",
             ]);
         } else {
-            $mensajesPendientesModerar = $repositorioMensajes->getByEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO]);
-
-            if(sizeof($mensajesPendientesModerar) == 0) {
-                $respuesta = view("error", [
-                    "usuarioLogeado" => $usuarioLogeado,
-                    "mensaje" => "Aún no hay ningún mensaje para moderar.",
-                ]);
-            } else {
-                $respuesta = view("moderacion", [
-                    "usuarioLogeado" => $usuarioLogeado,
-                    "mensajes" => $mensajesPendientesModerar
-                ]);
-            }
+            $respuesta = view("moderacion", [
+                "usuarioLogeado" => $usuarioLogeado,
+                "mensajes" => $mensajesPendientesModerar
+            ]);
         }
 
         return $respuesta;

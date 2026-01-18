@@ -17,7 +17,8 @@ class NecesitaRol {
 
 
     /**
-     * Handle an incoming request.
+     * Comprueba que el usuario logueado tenga el rol que se pase como parametro,
+     * si no lo tiene se muestra la pagina de no encontrado (404)
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
@@ -28,7 +29,7 @@ class NecesitaRol {
         $usuarioLogeado = $authController->getUsuarioLogeado();
 
         if(!$usuarioLogeado->tieneRol($rol)) {
-            $respuesta = redirect()->route("inicio");
+            $respuesta = abort(404);
         } else {
             $respuesta = $next($request);
         }
