@@ -53,4 +53,8 @@ class LoginController extends Controller {
         return $respuesta;
     }
 
+    function logout() {
+        $this->authController->logout();
+    }
+
 }

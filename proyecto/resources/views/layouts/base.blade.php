@@ -7,6 +7,7 @@
     <title>@yield("titulo", "Red social")</title>
     <link rel="stylesheet" href="/recursos/estilos.css">
     <script src="/recursos/js/principal.js"></script>
+    <meta csrf-token="{{csrf_token()}}">
 </head>
 
 <body>

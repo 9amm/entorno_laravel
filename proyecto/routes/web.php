@@ -58,6 +58,9 @@ Route::post('/register', [RegisterController::class, "register"])
 Route::post('/login', [LoginController::class, "login"])
     ->name("login_post");
 
+Route::post('/logout', [LoginController::class, "logout"])
+    ->name("logout");
+
 
 //rutas mensajes
 /*

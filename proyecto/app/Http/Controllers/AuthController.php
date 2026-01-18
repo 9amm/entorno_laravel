@@ -33,7 +33,7 @@ class AuthController extends Controller {
 
 
     function logout(): void{
-        $_SESSION["idUsuario"] = "";
+        $this->peticion->session()->flush();
     }
 
     /**
