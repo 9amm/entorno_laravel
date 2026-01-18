@@ -8,6 +8,7 @@ use App\Http\Controllers\ModeracionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\Autenticar;
 use App\Http\Middleware\NecesitaRol;
+use App\Http\Middleware\RechazarSiAutenticado;
 use App\Models\Rol;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -47,16 +48,20 @@ Route::post('/moderation/{id}/{accion}', [ModeracionController::class, "moderar"
 
 
 Route::get('/login', [LoginController::class, "show"])
-    ->name("login_formulario");
+    ->name("login_formulario")
+    ->middleware(RechazarSiAutenticado::class);
 
 Route::get('/register', [RegisterController::class, "show"])
-    ->name("register_formulario");
+    ->name("register_formulario")
+    ->middleware(RechazarSiAutenticado::class);
 
 Route::post('/register', [RegisterController::class, "register"])
-    ->name("register_post");
+    ->name("register_post")
+    ->middleware(RechazarSiAutenticado::class);
 
 Route::post('/login', [LoginController::class, "login"])
-    ->name("login_post");
+    ->name("login_post")
+    ->middleware(RechazarSiAutenticado::class);
 
 Route::post('/logout', [LoginController::class, "logout"])
     ->name("logout");
