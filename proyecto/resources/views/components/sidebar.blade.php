@@ -1,15 +1,9 @@
-@props([
-    "nombre",
-    "rol",
-    "esProfesor",
-])
-
 <aside>
     <h1>Red social</h1>
     <nav>
         <ul>
             <li><a id="inicio" href="/">Inicio</a></li>
-            @if($esProfesor)
+            @if(Auth::user()->esProfesor())
                 <li><a id="moderacion" href="/moderation">Moderación</a></li>
             @endif
 
@@ -19,6 +13,6 @@
     </nav>
 
 
-    <x-info-usuario-logueado nombre="{{ $nombre }}" rol="{{ $rol }}"></x-info-usuario-logueado>
+    <x-info-usuario-logueado nombre="{{ Auth::user()->nombre }}" rol="{{ Auth::user()->rol }}"></x-info-usuario-logueado>
 
 </aside>
