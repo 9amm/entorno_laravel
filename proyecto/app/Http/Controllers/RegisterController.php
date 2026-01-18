@@ -7,6 +7,7 @@ use App\Models\Rol;
 use App\Models\User;
 use App\Utils\Utils;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 
@@ -76,7 +77,7 @@ class RegisterController extends Controller {
 
                         //guardamos en la sesion el usuario que se acaba de crear para que en la
                         //proximas peticiones no se le pida iniciar sesion
-                        $authController->setUsuarioLogeado($nuevoUsuario);
+                        Auth::login($nuevoUsuario);
                         return redirect()->route("inicio");
 
                     } else {

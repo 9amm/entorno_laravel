@@ -6,6 +6,7 @@ use App\Contracts\IUsersRepository;
 use App\Http\Controllers\AuthController;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Autenticar {
@@ -24,7 +25,7 @@ class Autenticar {
         $authController = new AuthController($this->repositorioUsuarios, $request);
         $respuesta = null;
 
-        if(!$authController->usuarioEstaLogueado()) {
+        if(!Auth::check()) {
             $rutaCompletaSolicitada = $request->url();
             //no esta logeado asi que no puede acceder pero de todas formas
             //vamos a guardar la ruta a la que queria entrar para luego poder

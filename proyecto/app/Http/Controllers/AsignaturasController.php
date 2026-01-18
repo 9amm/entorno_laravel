@@ -11,9 +11,9 @@ class AsignaturasController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController) {
+    public function index(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
         $asinaturas = $repositorioAsignaturas->getAll();
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+        $usuarioLogeado = $peticion->user();
 
         $respuesta = null;
 
@@ -51,10 +51,10 @@ class AsignaturasController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show($idAsignatura, IAsignaturasRepository $repositorioAsignaturas, AuthController $authController) {
+    public function show($idAsignatura, IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
         //buscamos en la bd la asignatura con el id que se pase como parametro
         $asignatura = $repositorioAsignaturas->getById($idAsignatura);
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+        $usuarioLogeado = $peticion->user();
 
         $respuesta = null;
 

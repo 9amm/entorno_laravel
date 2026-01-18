@@ -26,8 +26,8 @@ class UsuarioProvider implements UserProvider {
     }
 
     public function retrieveByCredentials(array $credentials) {
-        $email = $credentials["email"];
-        return $this->repositorioUsuarios->getByEmail($email);
+        $nombre = $credentials["usuario"];
+        return $this->repositorioUsuarios->getByNombre($nombre);
     }
 
     public function validateCredentials(Authenticatable $user, array $credentials) {

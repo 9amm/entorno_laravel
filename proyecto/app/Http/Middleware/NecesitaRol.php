@@ -26,7 +26,7 @@ class NecesitaRol {
         $authController = new AuthController($this->repositorioUsuarios, $request);
         $respuesta = null;
 
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+        $usuarioLogeado = $request->user();
 
         if(!$usuarioLogeado->tieneRol($rol)) {
             $respuesta = abort(404);
