@@ -2,10 +2,9 @@
 namespace App\Models;
 use App\Repositories\MensajesJsonRepository;
 use App\Models\Rol;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-
-
-class User {
+class User implements Authenticatable{
 
     public ?int $id;
 	public string $nombre;
@@ -54,5 +53,41 @@ class User {
     function getMensajes(): array {
       return new MensajesJsonRepository()->getByUser($this);
     }
+
+
+
+    //AUTHENTICATABLE
+    public function getAuthIdentifierName() {
+        return "id";
+    }
+
+    public function getAuthIdentifier() {
+        return $this->id;
+    }
+
+    public function getAuthPassword() {
+        return $this->passHasheada;
+    }
+
+    public function getAuthPasswordName() {
+        return "pass_hasheada";
+    }
+
+    public function getRememberToken() {
+    }
+
+    public function setRememberToken($value) {
+    }
+
+    public function getRememberTokenName() {
+    }
+
+
+
+
+
+
+
+
 }
 ?>

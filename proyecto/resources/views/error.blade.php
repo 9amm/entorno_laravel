@@ -1,7 +1,7 @@
 @extends("layouts.base")
 
 @section("contenido")
-    <x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
+    <x-sidebar></x-sidebar>
 
     <x-contenido-principal>
         <x-alerta>

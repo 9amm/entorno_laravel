@@ -14,8 +14,8 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IMensajesRepository $repositorioMensajes, AuthController $authController) {
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+    public function index(IMensajesRepository $repositorioMensajes, AuthController $authController, Request $peticion) {
+        $usuarioLogeado = $peticion->user();
         $mensajesPublicados = $repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
 
         $respuesta = null;
@@ -57,63 +57,51 @@ class MessageController extends Controller
     public function store(Request $peticion, AuthController $authController,
         IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
 
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+        $usuarioLogeado = $peticion->user();
 
         $respuesta = null;
 
-        if($usuarioLogeado != null) {
+        $idAsignatura = $peticion->input("id_asignatura", "");
+        $contenidoMensaje = $peticion->input("mensaje", "");
 
-            $idAsignatura = $peticion->input("id_asignatura", "");
-            $contenidoMensaje = $peticion->input("mensaje", "");
+        if (empty($idAsignatura) || empty($contenidoMensaje)) {
+            $respuesta = view("error", [ "mensaje" => "Todos los campos son obligatorios."]);
 
-            if (empty($idAsignatura) || empty($contenidoMensaje)) {
-                $respuesta = view("error", [
-                    "mensaje" => "Todos los campos son obligatorios.",
-                    "usuarioLogeado" => $usuarioLogeado
-                ]);
-                //cargarLayout($usuarioLogeado, "Error", "mensaje_warning.php", );
+        } else if(!Mensaje::tieneLongitudValida($contenidoMensaje)) {
+            $respuesta = view("error", [ "mensaje" => "Longitud del mensaje no valida."]);
 
-            } else if(!Mensaje::tieneLongitudValida($contenidoMensaje)) {
-                $respuesta = view("error", [
-                    "mensaje" => "Longitud del mensaje no valida.",
-                    "usuarioLogeado" => $usuarioLogeado
-                ]);
-            } else {
-                $idAsignturaExiste = $repositorioAsignaturas->getById($idAsignatura) != null;
+        } else {
+            $idAsignturaExiste = $repositorioAsignaturas->getById($idAsignatura) != null;
 
-                if($idAsignturaExiste) {
-                    $idUsuarioLogeado = $usuarioLogeado->id;
+            if($idAsignturaExiste) {
 
-                    if(Mensaje::contienePalabrasVetadas($contenidoMensaje)) {
-                        $estado = EstadosMensaje::PELIGROSO;
-                        $mensajeAlerta = "Hemos detectado que el mensaje contiene palabras vetadas, el mensaje queda pendiente de revisión por parte de un moderador.";
-                    }else{
-                        $estado = EstadosMensaje::PENDIENTE;   
-                        $mensajeAlerta = "Mensaje creado correctamente, queda pendiente de moderar.";
-                    }
-                    
-                    $mensaje = new Mensaje(
-                        contenido: $contenidoMensaje,
-                        idAsignatura: $idAsignatura,
-                        idUsuario: $idUsuarioLogeado,
-                        estadoMensaje: $estado,
-                        timestampCreacion: time()
-                    );
-                    
-                    //guardamos el mensaje en la bd
-                    $repositorioMensajes->save($mensaje);
-
-                    $respuesta = view("error", [
-                        "mensaje" => $mensajeAlerta,
-                        "usuarioLogeado" => $usuarioLogeado
-                    ]);
-
-                } else {
-                    $respuesta = view("error", [
-                        "mensaje" => "Asignatura no encontrada.",
-                        "usuarioLogeado" => $usuarioLogeado
-                    ]);
+                if(Mensaje::contienePalabrasVetadas($contenidoMensaje)) {
+                    $estado = EstadosMensaje::PELIGROSO;
+                    $mensajeAlerta = "Hemos detectado que el mensaje contiene palabras vetadas, el mensaje queda pendiente de revisión por parte de un moderador.";
+                }else{
+                    $estado = EstadosMensaje::PENDIENTE;   
+                    $mensajeAlerta = "Mensaje creado correctamente, queda pendiente de moderar.";
                 }
+                
+                $mensaje = new Mensaje(
+                    contenido: $contenidoMensaje,
+                    idAsignatura: $idAsignatura,
+                    idUsuario: $usuarioLogeado->id,
+                    estadoMensaje: $estado,
+                    timestampCreacion: time()
+                );
+                
+                //guardamos el mensaje en la bd
+                $repositorioMensajes->save($mensaje);
+
+                $respuesta = view("error", [
+                    "mensaje" => $mensajeAlerta,
+                ]);
+
+            } else {
+                $respuesta = view("error", [
+                    "mensaje" => "Asignatura no encontrada.",
+                ]);
             }
         }
 

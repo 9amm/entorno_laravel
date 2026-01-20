@@ -7,7 +7,7 @@
 
 
 @section('contenido')
-    <x-sidebar nombre="{{$usuarioLogeado->nombre}}" rol="{{$usuarioLogeado->rol}}" es-profesor="{{$usuarioLogeado->esProfesor()}}"></x-sidebar>
+    <x-sidebar></x-sidebar>
 
     <x-contenido-principal titulo="Moderación">
         @foreach($mensajes as $mensaje)

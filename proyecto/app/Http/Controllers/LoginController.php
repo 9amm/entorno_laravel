@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\IUsersRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LoginController extends Controller {
@@ -29,20 +30,20 @@ class LoginController extends Controller {
 
 
         if(!empty($usuario) && !empty($pass)) {
-            $usuarioEncontrado = $this->repositorioUsuarios->getByNombre($usuario);
 
-            //si no se ha encontrado un usuario con el nombre introducido en el formulario
-            if($usuarioEncontrado != null && $pass == $usuarioEncontrado->passHasheada) {
-                $this->authController->setUsuarioLogeado($usuarioEncontrado);
+            $datosLogin =[
+                "usuario" => $usuario,
+                "pass" => $pass
+            ];
 
-                //buscamos en la bd si este usuario tiene el modo oscuro activado y enviamos al navegador
-                //una cookie con el valor obtenido, luego desde js podemos leer el valor de la cookie y cambiar
+            if(Auth::attempt($datosLogin)) {
                 //los colores de la pagina dependiendo de si el modo oscuro esta activado o no
-                setcookie("modoOscuroActivado", $usuarioEncontrado->getModoOscuroActivado() ? "true":"false");
+                setcookie("modoOscuroActivado", $peticion->user()->getModoOscuroActivado() ? "true":"false");
                 $peticion->session()->regenerate();
 
                 $rutaRedirigir = $peticion->session()->get("origenRedireccion", "") ?? "/";
                 $respuesta = redirect($rutaRedirigir);
+
             } else {
                 $respuesta = view("alerta_auth", ["mensaje" => "Datos de inicio de sesión no válidos"]);
             }
@@ -53,8 +54,11 @@ class LoginController extends Controller {
         return $respuesta;
     }
 
-    function logout() {
-        $this->authController->logout();
+    function logout(Request $request) {
+        
+         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 
 }
