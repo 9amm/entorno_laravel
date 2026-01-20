@@ -11,7 +11,7 @@ class AsignaturasController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
+    public function index(IAsignaturasRepository $repositorioAsignaturas, Request $peticion) {
         $asinaturas = $repositorioAsignaturas->getAll();
         $usuarioLogeado = $peticion->user();
 

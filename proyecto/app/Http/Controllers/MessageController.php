@@ -14,7 +14,7 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IMensajesRepository $repositorioMensajes, AuthController $authController, Request $peticion) {
+    public function index(IMensajesRepository $repositorioMensajes, Request $peticion) {
         $usuarioLogeado = $peticion->user();
         $mensajesPublicados = $repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
 
@@ -38,8 +38,8 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController): View {
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+    public function create(Request $peticion, IAsignaturasRepository $repositorioAsignaturas): View {
+        $usuarioLogeado = $peticion->user();
 
         $asignaturas = $repositorioAsignaturas->getAll();
 
@@ -48,14 +48,12 @@ class MessageController extends Controller
             "asignaturas" => $asignaturas
         ]);
 
-        //cargarLayout($usuario, "Crear mensaje", "crear_mensaje.php", ["asignaturas" => $asignaturas]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $peticion, AuthController $authController,
-        IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
+    public function store(Request $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
 
         $usuarioLogeado = $peticion->user();
 

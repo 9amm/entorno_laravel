@@ -23,7 +23,7 @@ class RegisterController extends Controller {
     }
 
 
-    function register(Request $peticion, IUsersRepository $repositorioUsuarios, AuthController $authController) {
+    function register(Request $peticion, IUsersRepository $repositorioUsuarios) {
 
 
         //$usuario = $peticion->input("usuario", "");

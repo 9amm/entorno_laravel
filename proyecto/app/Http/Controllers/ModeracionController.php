@@ -12,8 +12,8 @@ class ModeracionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(AuthController $authController, IMensajesRepository $repositorioMensajes) {
-        $usuarioLogeado = $authController-> getUsuarioLogeado();
+    public function index(Request $peticion, IMensajesRepository $repositorioMensajes) {
+        $usuarioLogeado = $peticion->user();
         $respuesta = null;
         $mensajesPendientesModerar = $repositorioMensajes->getByEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO]);
 

@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LoginController extends Controller {
-    protected IUsersRepository $repositorioUsuarios;
-    protected AuthController $authController;
-
-    function __construct(IUsersRepository $repositorioUsuarios, AuthController $authController) {
-        $this->repositorioUsuarios = $repositorioUsuarios;
-        $this->authController = $authController;
-    }
 
     function show() : View {
         return view("login");
@@ -41,8 +34,7 @@ class LoginController extends Controller {
                 setcookie("modoOscuroActivado", $peticion->user()->getModoOscuroActivado() ? "true":"false");
                 $peticion->session()->regenerate();
 
-                $rutaRedirigir = $peticion->session()->get("origenRedireccion", "") ?? "/";
-                $respuesta = redirect($rutaRedirigir);
+                $respuesta = redirect()->intended();
 
             } else {
                 $respuesta = view("alerta_auth", ["mensaje" => "Datos de inicio de sesión no válidos"]);
@@ -55,8 +47,7 @@ class LoginController extends Controller {
     }
 
     function logout(Request $request) {
-        
-         Auth::logout();
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
     }
