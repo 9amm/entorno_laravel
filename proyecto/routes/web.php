@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\AsignaturasController;
-use App\Http\Controllers\Error404NoEncontrado;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ModeracionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Middleware\NecesitaRol;
 use App\Models\Rol;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +64,9 @@ Route::post('/login', [LoginController::class, "login"])
 Route::post('/logout', [LoginController::class, "logout"])
     ->name("logout");
 
+Route::post('/theme', [ThemeController::class, "setTema"])
+    ->name("set_tema")
+    ->middleware("auth");
 
 //rutas mensajes
 /*
