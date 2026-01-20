@@ -54,8 +54,11 @@ class LoginController extends Controller {
         return $respuesta;
     }
 
-    function logout() {
-        $this->authController->logout();
+    function logout(Request $request) {
+        
+         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 
 }
