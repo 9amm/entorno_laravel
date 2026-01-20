@@ -51,12 +51,9 @@ class AsignaturasController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show($idAsignatura, IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
+    public function show(Request $peticion, Asignatura $asignatura) {
         //buscamos en la bd la asignatura con el id que se pase como parametro
-        $asignatura = $repositorioAsignaturas->getById($idAsignatura);
         $usuarioLogeado = $peticion->user();
-
-        $respuesta = null;
 
         //si no encontramos ninguna asignatura
         if($asignatura != null) {

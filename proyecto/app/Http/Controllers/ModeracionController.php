@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\IMensajesRepository;
 use App\Models\EstadosMensaje;
+use App\Models\Mensaje;
 use Illuminate\Http\Request;
 
 class ModeracionController extends Controller
@@ -31,10 +32,8 @@ class ModeracionController extends Controller
         return $respuesta;
     }
 
-    public function moderar($idMensaje, $accion, IMensajesRepository $repositorioMensajes) {
-        $mensaje = $repositorioMensajes->getById($idMensaje);
+    public function moderar(IMensajesRepository $repositorioMensajes, Mensaje $mensaje, string $accion) {
 
-        //TODO: comprobar rol
         if ($mensaje == null) {
             echo ("mensaje no encontrado");
         } else if (!$mensaje->tieneAlgunoDeLosEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO])) {
