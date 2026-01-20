@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\IMensajesRepository;
 use App\Models\EstadosMensaje;
+use App\Models\Mensaje;
 use Illuminate\Http\Request;
 
 class ModeracionController extends Controller
@@ -11,19 +12,16 @@ class ModeracionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(AuthController $authController, IMensajesRepository $repositorioMensajes) {
-        $usuarioLogeado = $authController-> getUsuarioLogeado();
+    public function index(IMensajesRepository $repositorioMensajes) {
         $respuesta = null;
         $mensajesPendientesModerar = $repositorioMensajes->getByEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO]);
 
         if(sizeof($mensajesPendientesModerar) == 0) {
             $respuesta = view("error", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensaje" => "Aún no hay ningún mensaje para moderar.",
             ]);
         } else {
             $respuesta = view("moderacion", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensajes" => $mensajesPendientesModerar
             ]);
         }
@@ -31,10 +29,8 @@ class ModeracionController extends Controller
         return $respuesta;
     }
 
-    public function moderar($idMensaje, $accion, IMensajesRepository $repositorioMensajes) {
-        $mensaje = $repositorioMensajes->getById($idMensaje);
+    public function moderar(IMensajesRepository $repositorioMensajes, Mensaje $mensaje, string $accion) {
 
-        //TODO: comprobar rol
         if ($mensaje == null) {
             echo ("mensaje no encontrado");
         } else if (!$mensaje->tieneAlgunoDeLosEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO])) {

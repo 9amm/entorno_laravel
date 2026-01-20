@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Contracts\IUsersRepository;
-use App\Http\Controllers\AuthController;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +22,6 @@ class NecesitaRol {
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next, string $rol): Response {
-        $authController = new AuthController($this->repositorioUsuarios, $request);
         $respuesta = null;
 
         $usuarioLogeado = $request->user();

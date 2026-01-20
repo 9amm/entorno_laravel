@@ -11,9 +11,8 @@ class AsignaturasController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
+    public function index(IAsignaturasRepository $repositorioAsignaturas) {
         $asinaturas = $repositorioAsignaturas->getAll();
-        $usuarioLogeado = $peticion->user();
 
         $respuesta = null;
 
@@ -22,12 +21,10 @@ class AsignaturasController extends Controller {
             //cargarLayout($usuario, "Mensajes","mensaje_warning.php", ["mensaje" => "Aún no hay ninguna asignatura."]);
             $respuesta = view("error", [
                 "mensaje" => "Aún no hay ninguna asignatura.",
-                "usuarioLogeado" => $usuarioLogeado
             ]);
         } else {
             $respuesta = view("asignaturas", [
                 "asignaturas" => $asinaturas,
-                "usuarioLogeado" => $usuarioLogeado
             ]);
         }
 
@@ -51,12 +48,8 @@ class AsignaturasController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show($idAsignatura, IAsignaturasRepository $repositorioAsignaturas, AuthController $authController, Request $peticion) {
+    public function show(Asignatura $asignatura) {
         //buscamos en la bd la asignatura con el id que se pase como parametro
-        $asignatura = $repositorioAsignaturas->getById($idAsignatura);
-        $usuarioLogeado = $peticion->user();
-
-        $respuesta = null;
 
         //si no encontramos ninguna asignatura
         if($asignatura != null) {
@@ -69,7 +62,6 @@ class AsignaturasController extends Controller {
                 "asignatura" => $asignatura,
                 "mensajes" => $mensajes,
                 "numMensajes" => $numMensajes,
-                "usuarioLogeado" => $usuarioLogeado,
             ];
 
             $respuesta = view("detalle_asignatura", $variablesVista);
@@ -77,7 +69,6 @@ class AsignaturasController extends Controller {
         } else {
             $respuesta = view("error", [
                 "mensaje" => "Asignatura no encontrada",
-                "usuarioLogeado" => $usuarioLogeado,
             ]);
         }
 

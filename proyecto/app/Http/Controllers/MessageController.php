@@ -14,20 +14,17 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IMensajesRepository $repositorioMensajes, AuthController $authController, Request $peticion) {
-        $usuarioLogeado = $peticion->user();
+    public function index(IMensajesRepository $repositorioMensajes) {
         $mensajesPublicados = $repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
 
         $respuesta = null;
 
         if(sizeof($mensajesPublicados) == 0) {
             $respuesta = view("error", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensaje" => "Aún no hay ningún mensaje publicado."
             ]);
         } else {
             $respuesta = view("inicio", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensajes" => $mensajesPublicados,
             ]);
         }
@@ -38,24 +35,20 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(IAsignaturasRepository $repositorioAsignaturas, AuthController $authController): View {
-        $usuarioLogeado = $authController->getUsuarioLogeado();
+    public function create(IAsignaturasRepository $repositorioAsignaturas): View {
 
         $asignaturas = $repositorioAsignaturas->getAll();
 
         return view("crear_mensaje", [
-            "usuarioLogeado" => $usuarioLogeado,
             "asignaturas" => $asignaturas
         ]);
 
-        //cargarLayout($usuario, "Crear mensaje", "crear_mensaje.php", ["asignaturas" => $asignaturas]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $peticion, AuthController $authController,
-        IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
+    public function store(Request $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
 
         $usuarioLogeado = $peticion->user();
 
