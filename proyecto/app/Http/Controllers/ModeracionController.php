@@ -12,19 +12,16 @@ class ModeracionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $peticion, IMensajesRepository $repositorioMensajes) {
-        $usuarioLogeado = $peticion->user();
+    public function index(IMensajesRepository $repositorioMensajes) {
         $respuesta = null;
         $mensajesPendientesModerar = $repositorioMensajes->getByEstados([EstadosMensaje::PENDIENTE, EstadosMensaje::PELIGROSO]);
 
         if(sizeof($mensajesPendientesModerar) == 0) {
             $respuesta = view("error", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensaje" => "Aún no hay ningún mensaje para moderar.",
             ]);
         } else {
             $respuesta = view("moderacion", [
-                "usuarioLogeado" => $usuarioLogeado,
                 "mensajes" => $mensajesPendientesModerar
             ]);
         }
