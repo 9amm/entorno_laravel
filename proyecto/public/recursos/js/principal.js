@@ -4,8 +4,10 @@ async function guardarValorModoOscuroEnServidor(modoOscuroActivado) {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            'X-CSRF-TOKEN': getCsrfToken(),
         },
         body: `modoOscuroActivado=${modoOscuroActivado}`
+        
     })
 }
 
@@ -97,3 +99,4 @@ async function logout() {
         await enviarPeticionLogout();
     }
 }
+
