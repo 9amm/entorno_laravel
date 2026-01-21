@@ -19,8 +19,8 @@
 
     @if(!$haSidoModerado)
     <div>
-        <button class="boton" onclick="approveMessage({{$idMensaje}})">Aprobar</button>
-        <button onclick="rejectMessage({{$idMensaje}})">Rechazar</button>
+        <button class="boton"  data-url="{{route('mensaje_moderar', ["mensaje" => $idMensaje, "accion" => "approve"])}}" onclick="approveMessage(this)">Aprobar</button>
+        <button data-url="{{route('mensaje_moderar', ["mensaje" => $idMensaje, "accion" => "reject"])}}" onclick="rejectMessage(this)">Rechazar</button>
     </div>
     @endif
  

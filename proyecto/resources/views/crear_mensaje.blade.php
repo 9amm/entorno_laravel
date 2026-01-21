@@ -5,7 +5,7 @@
     <x-sidebar></x-sidebar>
 
     <x-contenido-principal titulo="Crear mensaje">
-        <form method="post" action="/messages" class="form-crear-mensaje">
+        <form method="post" action="{{route('mensaje_formulario_guardar')}}" class="form-crear-mensaje">
             @csrf
 
             <label for="asignatura">Asignatura</label>

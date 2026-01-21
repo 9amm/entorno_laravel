@@ -1,6 +1,6 @@
 //Modo Oscuro
-async function guardarValorModoOscuroEnServidor(modoOscuroActivado) {
-    await fetch("/theme", {
+async function guardarValorModoOscuroEnServidor(url, modoOscuroActivado) {
+    await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -22,11 +22,14 @@ function cssModoOscuroActivado(estaActivado) {
     }
 }
 
-async function modoOscuroActivado(estaActivado) {
+async function modoOscuroActivado(boton) {
+    const estaActivado = boton.checked;
+
     cssModoOscuroActivado(estaActivado);
+    const url = getUrl(boton);
 
     document.cookie = `modoOscuroActivado=${estaActivado};path=/`;
-    await guardarValorModoOscuroEnServidor(estaActivado)
+    await guardarValorModoOscuroEnServidor(url, estaActivado)
 }
 
 
@@ -59,10 +62,8 @@ function getCsrfToken(elemento) {
 
 
 //TODO: codigo muy parecido, guardar url en el boton?
-async function approveMessage(idMensaje) {
-    //let idMensaje = getIdMensaje(boton);
-    ruta = `/moderation/${idMensaje}/approve`;
-    await fetch(ruta, {
+async function approveMessage(boton) {
+    await fetch(getUrl(boton), {
         method: "POST",
         headers: {
             'X-CSRF-TOKEN': getCsrfToken()
@@ -71,9 +72,8 @@ async function approveMessage(idMensaje) {
     location.reload();
 }
 
-async function rejectMessage(idMensaje) {
-    ruta = `/moderation/${idMensaje}/reject`;
-    await fetch(ruta, {
+async function rejectMessage(boton) {
+    await fetch(getUrl(boton), {
         method: "POST",
         headers: {
             'X-CSRF-TOKEN': getCsrfToken()
@@ -82,10 +82,13 @@ async function rejectMessage(idMensaje) {
     location.reload();
 }
 
+function getUrl(elemento) {
+    return elemento.dataset.url
+}
 
 //LOGOUT
-async function enviarPeticionLogout() {
-    await fetch("/logout", {
+async function enviarPeticionLogout(url) {
+    await fetch(url, {
         method: "POST",
         headers: {
             'X-CSRF-TOKEN': getCsrfToken()
@@ -94,9 +97,10 @@ async function enviarPeticionLogout() {
     location.reload();
 }
 
-async function logout() {
+async function logout(boton) {
+    const url = getUrl(boton)
     if(confirm("¿Cerrar sesión?")) {
-        await enviarPeticionLogout();
+        await enviarPeticionLogout(url);
     }
 }
 

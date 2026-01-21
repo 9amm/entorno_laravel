@@ -3,7 +3,7 @@
 @section("contenido")
     <script src="/recursos/js/hash.js" defer></script>
 
-    <form class="contenedor-sesion" action="/register" method="post">
+    <form class="contenedor-sesion" action="{{route("register_formulario")}}" method="post">
         @csrf
 
         <h1>Registrarse</h1>
@@ -64,7 +64,7 @@
         </script>
 
 
-        <p>¿Ya tienes cuenta? <a href="/login">Iniciar Sesión</a></p>
+        <p>¿Ya tienes cuenta? <a href="{{route('login_formulario')}}">Iniciar Sesión</a></p>
 
     </form>
 @endsection

@@ -15,7 +15,7 @@
 
         <input class="boton" type="submit" value="Iniciar Sesión">
         
-        <p>¿No tienes cuenta? <a href="/register">Registrarse</a></p>
+        <p>¿No tienes cuenta? <a href="{{route('register_formulario')}}">Registrarse</a></p>
     </form>
 
 @endsection
