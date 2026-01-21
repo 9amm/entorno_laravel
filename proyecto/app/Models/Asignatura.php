@@ -1,6 +1,9 @@
 <?php
 namespace App\Models;
+
+use App\Contracts\IMensajesRepository;
 use App\Repositories\MensajesJsonRepository;
+use Illuminate\Support\Facades\App;
 
 class Asignatura {
     public ?int $id;
@@ -17,7 +20,7 @@ class Asignatura {
      * sin importar su estado
      */
     function getMensajes(): array {
-        return new MensajesJsonRepository()->getByAsignatura($this->id);
+        return App::make(IMensajesRepository::class)->getByAsignatura($this->id);
     }
 
     /**
