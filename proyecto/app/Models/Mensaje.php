@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
+
+use App\Contracts\IAsignaturasRepository;
+use App\Contracts\IUsersRepository;
 use App\Repositories\UsersJsonRepository;
 use App\Repositories\AsignaturasJsonRepository;
 use App\Utils\Utils;
 use App\Models\EstadosMensaje;
-	
-
-
+use Illuminate\Support\Facades\App;
 
 class Mensaje {
     const LONGITUD_MINIMA = 1;
@@ -60,7 +61,7 @@ class Mensaje {
      * Devuelve el usuario que creo el mensaje
      */
     function getUsuario(): ?User {
-        return new UsersJsonRepository()->getById($this->idUsuario);
+        return App::make(IUsersRepository::class)->getById($this->idUsuario);
     }
 
     /**
@@ -69,7 +70,7 @@ class Mensaje {
      * y este mensaje sigue guardando su id
      */
     function getAsignatura(): ?Asignatura {
-        return new AsignaturasJsonRepository()->getById($this->idAsignatura);
+        return App::make(IAsignaturasRepository::class)->getById($this->idAsignatura);
     }
 
 

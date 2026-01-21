@@ -1,8 +1,11 @@
 <?php
 namespace App\Models;
+
+use App\Contracts\IMensajesRepository;
 use App\Repositories\MensajesJsonRepository;
 use App\Models\Rol;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\App;
 
 class User implements Authenticatable{
 
@@ -12,6 +15,7 @@ class User implements Authenticatable{
 	public string $passHasheada;
 	public string $rol;
 	public bool $modoOscuroActivado;
+    public IMensajesRepository $repositorioMensajes;
 
     function __construct(string $nombre, string $email, string $passHasheada, string $rol, bool $modoOscuroActivado = false, ?int $id = null) {
         $this->id = $id; //se le asigna valor al guardarlo en la bd json
@@ -20,6 +24,7 @@ class User implements Authenticatable{
         $this->passHasheada = $passHasheada;
         $this->rol = $rol;
         $this->modoOscuroActivado = $modoOscuroActivado;
+        $this->repositorioMensajes = App::make(IMensajesRepository::class);
     }
 
     function tieneRol(string $rol) {
@@ -51,7 +56,7 @@ class User implements Authenticatable{
      * Devuelve todos los mensajes que ha publicado un usuario
      */
     function getMensajes(): array {
-      return new MensajesJsonRepository()->getByUser($this);
+        return $this->repositorioMensajes->getByUser($this);
     }
 
 
