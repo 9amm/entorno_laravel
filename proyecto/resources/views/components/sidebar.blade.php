@@ -2,13 +2,13 @@
     <h1>Red social</h1>
     <nav>
         <ul>
-            <li><a id="inicio" href="/">Inicio</a></li>
+            <li><a id="inicio" href="{{ route("inicio") }}">Inicio</a></li>
             @if(Auth::user()->esProfesor())
-                <li><a id="moderacion" href="/moderation">Moderación</a></li>
+                <li><a id="moderacion" href="{{ route("mensaje_pendientes_moderar") }}">Moderación</a></li>
             @endif
 
-            <li><a id="asignaturas" href="/subjects">Asignaturas</a></li>
-            <li><a id="crear-mensaje" class="boton" href="/messages/new">Crear mensaje</a></li>
+            <li><a id="asignaturas" href="{{ route("asignaturas_listado") }}">Asignaturas</a></li>
+            <li><a id="crear-mensaje" class="boton" href=" {{route("mensaje_formulario_crear")}}">Crear mensaje</a></li>
         </ul>
     </nav>
 
