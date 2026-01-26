@@ -94,7 +94,7 @@ async function enviarPeticionLogout(url) {
             'X-CSRF-TOKEN': getCsrfToken()
         }
     });
-    location.reload();
+    window.location.href = "/";
 }
 
 async function logout(boton) {
