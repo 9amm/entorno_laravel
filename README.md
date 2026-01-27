@@ -104,7 +104,7 @@ Seguridad de sesion, laravel gestiona la rotación de IDs de sesión y la protec
 | Profesor | profesor1 | @Holaquetal |
 
 ## Intruciones para generar documentación con Doxygen.
-Priemro entramos terminal en el contenedor desde la raíz del proyecto y ejecutamos el comando: "doxygen", esto genera automaticamente una carpeta en docs con toda la nueva documentación.
+Primero entramos al terminal en el contenedor desde la raíz del proyecto y ejecutamos el comando: "doxygen", esto genera automaticamente una carpeta en docs con toda la nueva documentación.
 Para encontrarlo tenemos que entrar en docs/html y abrir el archivo index.html.
 
 ## Instalacion
@@ -113,3 +113,4 @@ Clonar el proyecto y situarse en la raiz
 
 
 Ejecutar “docker compose up”
+
