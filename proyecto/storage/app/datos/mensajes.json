@@ -1,37 +1,4 @@
 {
-    "ultimoId": 4,
-    "items": {
-        "1": {
-            "id": 1,
-            "contenido": "pruebaaa",
-            "idAsignatura": 2,
-            "idUsuario": 1,
-            "estadoMensaje": "peligroso",
-            "timestampCreacion": 1
-        },
-        "2": {
-            "id": 2,
-            "contenido": "pruebaaa",
-            "idAsignatura": 2,
-            "idUsuario": 1,
-            "estadoMensaje": "peligroso",
-            "timestampCreacion": 1
-        },
-        "3": {
-            "id": 3,
-            "contenido": "pruebaaa",
-            "idAsignatura": 2,
-            "idUsuario": 1,
-            "estadoMensaje": "peligroso",
-            "timestampCreacion": 1
-        },
-        "4": {
-            "id": 4,
-            "contenido": "pruebaaa",
-            "idAsignatura": 2,
-            "idUsuario": 1,
-            "estadoMensaje": "peligroso",
-            "timestampCreacion": 1
-        }
-    }
+    "ultimoId": 0,
+    "items": []
 }
