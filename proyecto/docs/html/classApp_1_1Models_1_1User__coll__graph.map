@@ -1,0 +1,7 @@
+<map id="App\Models\User" name="App\Models\User">
+<area shape="rect" id="Node000001" title=" " alt="" coords="109,93,241,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,131,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,37,162,91,159,95,91,41"/>
+<area shape="rect" id="Node000003" href="$interfaceApp_1_1Contracts_1_1IMensajesRepository.html" title=" " alt="" coords="155,5,408,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="258,41,191,95,187,91,255,37"/>
+</map>

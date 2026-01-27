@@ -1,0 +1,7 @@
+<map id="App\Providers\UsuarioProvider" name="App\Providers\UsuarioProvider">
+<area shape="rect" id="Node000001" title=" " alt="" coords="45,93,265,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,112,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,38,143,91,140,95,80,42"/>
+<area shape="rect" id="Node000003" href="$interfaceApp_1_1Contracts_1_1IUsersRepository.html" title=" " alt="" coords="137,5,365,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="229,42,170,95,166,91,226,38"/>
+</map>

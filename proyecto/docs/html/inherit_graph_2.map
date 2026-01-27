@@ -1,0 +1,5 @@
+<map id="Gráfico de jerarquía de clases" name="Gráfico de jerarquía de clases">
+<area shape="rect" id="Node000000" href="$interfaceApp_1_1Contracts_1_1IUsersRepository.html" title=" " alt="" coords="5,13,233,38"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Repositories_1_1UsersJsonRepository.html" title=" " alt="" coords="281,5,481,45"/>
+<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="247,23,281,23,281,28,247,28"/>
+</map>

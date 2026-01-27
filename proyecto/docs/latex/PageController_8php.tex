@@ -1,0 +1,177 @@
+\doxysection{Referencia del archivo app/\+Page\+Controller.php}
+\hypertarget{PageController_8php}{}\label{PageController_8php}\index{app/PageController.php@{app/PageController.php}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{PageController_8php_a3e9efbf14538efb2cf4244a619195412}{cargar\+Vista}} (\$nombre\+Archivo\+Vista, \$datos=\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{PageController_8php_ac37ea0a44fb962d8e83d6a1438fd31a4}{cargar\+Layout}} (User \$usuario\+Logeado, string \$titulo\+Contenido, string \$vista\+Contenido, \$datos=\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{PageController_8php_a4e878e0408bec90e10cbad50745cef9a}{no\+Encontrado}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_acb88046a0a54d698c14758a1440a3b74}{inicio}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_af89171b0dddee3131955d0111e91cbe2}{lista\+Mensajes}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a58e99e78e878d12cb8b5e20e9df7637a}{formulario\+Registrarse}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a1df0b1dd3261f07b52de49ee78b76a97}{registrarse}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a878497a8099b802acdce661d9909083a}{formulario\+Login}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_aa311da27ba5706f5710cea7706c8eae1}{login}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a082405d89acd6835c3a7c7a08a7adbab}{logout}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a38fd1f6a50c85a3e84f4603090dd9411}{lista\+Asignaturas}} (\$id="{}"{})
+\item 
+\mbox{\hyperlink{PageController_8php_a6d38db7511e5e825d5c2ba09c5ab0a38}{formulario\+Crear\+Mensaje}} (\$accion="{}"{})
+\item 
+\mbox{\hyperlink{PageController_8php_a3295549d6bf177c882b9e2ffa60b991c}{crear\+Mensaje}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a9447b9ca67d655bf19e89ea9a6de3850}{lista\+Mensajes\+Moderar}} ()
+\item 
+\mbox{\hyperlink{PageController_8php_a9a8d25353f432984ea3a0ced5ba39313}{moderar}} (\$id\+Mensaje="{}"{}, \$accion="{}"{})
+\item 
+\mbox{\hyperlink{PageController_8php_a0aa5c3e9e45ab60252ad5cdfb43d893b}{set\+Tema}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{PageController_8php_ac37ea0a44fb962d8e83d6a1438fd31a4}\label{PageController_8php_ac37ea0a44fb962d8e83d6a1438fd31a4} 
+\index{PageController.php@{PageController.php}!cargarLayout@{cargarLayout}}
+\index{cargarLayout@{cargarLayout}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{cargarLayout()}{cargarLayout()}}
+{\footnotesize\ttfamily cargar\+Layout (\begin{DoxyParamCaption}\item[{User}]{\$usuario\+Logeado,  }\item[{string}]{\$titulo\+Contenido,  }\item[{string}]{\$vista\+Contenido,  }\item[{}]{\$datos = {\ttfamily \mbox{[}\mbox{]}} }\end{DoxyParamCaption})}
+
+Carga la vista del layout principal, con el aside y el contenido que le pasemos como parametro.
+
+La mayoria de paginas de la web tienen la misma estructura, una barra lateral con enlaces de navegacion y a su derecha un contenedor que muestra contenido diferente dependiendo de la pagina en la que estemos.
+
+Tiene sentido tener una vista plantilla con variables para las partes que cambien y una funcion que se encarga de pasar esos datos
+
+
+\begin{DoxyParams}{Parámetros}
+{\em usuario\+Logeado} & necesitamos saber cual es el usuario logueado para mostrar su nombre en el aside \\
+\hline
+{\em titulo\+Contenido} & es el encabezado que se mostrará sobre el contenido \\
+\hline
+{\em vista\+Contenido} & el nombre de archivo de la vista con el contenido \\
+\hline
+{\em datos} & array-\/clave valor que contiene las variables que se puedan necesitar la vista. Si por ejemplo la vista de contenido utiliza la variable "{}\$mensaje"{} tendremos que pasar un array \mbox{[}"{}mensaje"{} =\texorpdfstring{$>$}{>} "{}hola"{}\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{PageController_8php_a3e9efbf14538efb2cf4244a619195412}\label{PageController_8php_a3e9efbf14538efb2cf4244a619195412} 
+\index{PageController.php@{PageController.php}!cargarVista@{cargarVista}}
+\index{cargarVista@{cargarVista}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{cargarVista()}{cargarVista()}}
+{\footnotesize\ttfamily cargar\+Vista (\begin{DoxyParamCaption}\item[{}]{\$nombre\+Archivo\+Vista,  }\item[{}]{\$datos = {\ttfamily \mbox{[}\mbox{]}} }\end{DoxyParamCaption})}
+
+En este archivo hay funciones asociadas a cada pagina de la red social estas funciones son llamadas desde el router, que les pasa como parametro las partes de la url Carga una vista que se pasa como parametro dentro de una vista base, de esta forma todas las vistas incluyen el doctype, head, css y javascript que son necesarios en todas las vistas Todas las vistas que se cargan pasan por esta funcion Permite pasarle variables a la vista 
+\begin{DoxyParams}{Parámetros}
+{\em \$nombre\+Archivo\+Vista} & el nombre o la ruta de la vista que se quiere cargar \\
+\hline
+{\em \$datos} & un array clave valor que contiene las variables que se utilizan dentro de la vista que queremos cargar, la clave es el nombre de la variable y el valor es el valor de esa variable \\
+\hline
+\end{DoxyParams}
+\Hypertarget{PageController_8php_a3295549d6bf177c882b9e2ffa60b991c}\label{PageController_8php_a3295549d6bf177c882b9e2ffa60b991c} 
+\index{PageController.php@{PageController.php}!crearMensaje@{crearMensaje}}
+\index{crearMensaje@{crearMensaje}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{crearMensaje()}{crearMensaje()}}
+{\footnotesize\ttfamily crear\+Mensaje (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Se encarga de recoger y comprobar los datos que se envian via POST desde el formulario para crear mensajes. \Hypertarget{PageController_8php_a6d38db7511e5e825d5c2ba09c5ab0a38}\label{PageController_8php_a6d38db7511e5e825d5c2ba09c5ab0a38} 
+\index{PageController.php@{PageController.php}!formularioCrearMensaje@{formularioCrearMensaje}}
+\index{formularioCrearMensaje@{formularioCrearMensaje}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{formularioCrearMensaje()}{formularioCrearMensaje()}}
+{\footnotesize\ttfamily formulario\+Crear\+Mensaje (\begin{DoxyParamCaption}\item[{}]{\$accion = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+Muestra una vista con un formulario para crear nuevos mensajes. \Hypertarget{PageController_8php_a878497a8099b802acdce661d9909083a}\label{PageController_8php_a878497a8099b802acdce661d9909083a} 
+\index{PageController.php@{PageController.php}!formularioLogin@{formularioLogin}}
+\index{formularioLogin@{formularioLogin}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{formularioLogin()}{formularioLogin()}}
+{\footnotesize\ttfamily formulario\+Login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Carga una vista con un formulario de inicio de sesion \Hypertarget{PageController_8php_a58e99e78e878d12cb8b5e20e9df7637a}\label{PageController_8php_a58e99e78e878d12cb8b5e20e9df7637a} 
+\index{PageController.php@{PageController.php}!formularioRegistrarse@{formularioRegistrarse}}
+\index{formularioRegistrarse@{formularioRegistrarse}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{formularioRegistrarse()}{formularioRegistrarse()}}
+{\footnotesize\ttfamily formulario\+Registrarse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{PageController_8php_acb88046a0a54d698c14758a1440a3b74}\label{PageController_8php_acb88046a0a54d698c14758a1440a3b74} 
+\index{PageController.php@{PageController.php}!inicio@{inicio}}
+\index{inicio@{inicio}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{inicio()}{inicio()}}
+{\footnotesize\ttfamily inicio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{PageController_8php_a38fd1f6a50c85a3e84f4603090dd9411}\label{PageController_8php_a38fd1f6a50c85a3e84f4603090dd9411} 
+\index{PageController.php@{PageController.php}!listaAsignaturas@{listaAsignaturas}}
+\index{listaAsignaturas@{listaAsignaturas}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{listaAsignaturas()}{listaAsignaturas()}}
+{\footnotesize\ttfamily lista\+Asignaturas (\begin{DoxyParamCaption}\item[{}]{\$id = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+Muestra todos los mensajes publicados a partir del id de una asignatura 
+\begin{DoxyParams}{Parámetros}
+{\em id} & el id de la asignatura \\
+\hline
+\end{DoxyParams}
+\Hypertarget{PageController_8php_af89171b0dddee3131955d0111e91cbe2}\label{PageController_8php_af89171b0dddee3131955d0111e91cbe2} 
+\index{PageController.php@{PageController.php}!listaMensajes@{listaMensajes}}
+\index{listaMensajes@{listaMensajes}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{listaMensajes()}{listaMensajes()}}
+{\footnotesize\ttfamily lista\+Mensajes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Muestra una vista con todos los mensajes publicados \Hypertarget{PageController_8php_a9447b9ca67d655bf19e89ea9a6de3850}\label{PageController_8php_a9447b9ca67d655bf19e89ea9a6de3850} 
+\index{PageController.php@{PageController.php}!listaMensajesModerar@{listaMensajesModerar}}
+\index{listaMensajesModerar@{listaMensajesModerar}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{listaMensajesModerar()}{listaMensajesModerar()}}
+{\footnotesize\ttfamily lista\+Mensajes\+Moderar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Muestra una pagina con un listado de mensajes pendientes de moderar, comprobamos que el usuario esta logueado y tiene el rol necesario (profesor). \Hypertarget{PageController_8php_aa311da27ba5706f5710cea7706c8eae1}\label{PageController_8php_aa311da27ba5706f5710cea7706c8eae1} 
+\index{PageController.php@{PageController.php}!login@{login}}
+\index{login@{login}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Inicia la sesion de un usuario a partir de los datos enviados via POST \Hypertarget{PageController_8php_a082405d89acd6835c3a7c7a08a7adbab}\label{PageController_8php_a082405d89acd6835c3a7c7a08a7adbab} 
+\index{PageController.php@{PageController.php}!logout@{logout}}
+\index{logout@{logout}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily logout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{PageController_8php_a9a8d25353f432984ea3a0ced5ba39313}\label{PageController_8php_a9a8d25353f432984ea3a0ced5ba39313} 
+\index{PageController.php@{PageController.php}!moderar@{moderar}}
+\index{moderar@{moderar}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{moderar()}{moderar()}}
+{\footnotesize\ttfamily moderar (\begin{DoxyParamCaption}\item[{}]{\$id\+Mensaje = {\ttfamily "{}"{}},  }\item[{}]{\$accion = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+Esta funcion es la que permite aprobar o rechazar mensajes desde el panel de moderacion. 
+\begin{DoxyParams}{Parámetros}
+{\em id\+Mensaje} & el id del mensaje que se quiere aprobar o rechazar \\
+\hline
+{\em accion} & puede ser "{}approve"{} o "{}reject"{} Los parametros de esta funcion son pasados por el router, que los extrae de la url. Ej\+: POST /1/approve \\
+\hline
+\end{DoxyParams}
+\Hypertarget{PageController_8php_a4e878e0408bec90e10cbad50745cef9a}\label{PageController_8php_a4e878e0408bec90e10cbad50745cef9a} 
+\index{PageController.php@{PageController.php}!noEncontrado@{noEncontrado}}
+\index{noEncontrado@{noEncontrado}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{noEncontrado()}{noEncontrado()}}
+{\footnotesize\ttfamily no\+Encontrado (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Esta funcion la llama cuando el recurso solicitado no existe \Hypertarget{PageController_8php_a1df0b1dd3261f07b52de49ee78b76a97}\label{PageController_8php_a1df0b1dd3261f07b52de49ee78b76a97} 
+\index{PageController.php@{PageController.php}!registrarse@{registrarse}}
+\index{registrarse@{registrarse}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{registrarse()}{registrarse()}}
+{\footnotesize\ttfamily registrarse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Recoge los datos que se envian via POST desde el formulario para registrarse, valida los datos enviados y crea un nueva cuenta. \Hypertarget{PageController_8php_a0aa5c3e9e45ab60252ad5cdfb43d893b}\label{PageController_8php_a0aa5c3e9e45ab60252ad5cdfb43d893b} 
+\index{PageController.php@{PageController.php}!setTema@{setTema}}
+\index{setTema@{setTema}!PageController.php@{PageController.php}}
+\doxysubsubsection{\texorpdfstring{setTema()}{setTema()}}
+{\footnotesize\ttfamily set\+Tema (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Para cada cuenta de la red social guardamos que tema prefiere, si prefiere modo claro o prefiere modo oscuro.
+
+El usuario puede cambiar el tema desde la interfaz, cuando lo haga necesitamos guardar ese cambio en el servidor para que cuando inicie sesion desde otros dispositivos la web se muestre con el tema seleccionado.
+
+Esta funcion es la que se encarga de guardar el nuevo cambio de tema en el servidor, lee los datos que se envian en el cuerpo de la peticion POST, valida que cumpan un formato y los guarda. 

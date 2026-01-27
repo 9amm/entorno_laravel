@@ -1,0 +1,5 @@
+<map id="App\Repositories\UsersJsonRepository" name="App\Repositories\UsersJsonRepository">
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,79,219,119"/>
+<area shape="rect" id="Node000002" href="$interfaceApp_1_1Contracts_1_1IUsersRepository.html" title=" " alt="" coords="5,5,233,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,44,122,79,117,79,117,44"/>
+</map>

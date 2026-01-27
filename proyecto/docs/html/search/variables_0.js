@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['_24app_0',['$app',['../index_8php.html#a513c1ffd741d772107130a8f8059bde3',1,'index.php']]],
+  ['_24archivoasignaturas_1',['$archivoAsignaturas',['../classApp_1_1Repositories_1_1AsignaturasJsonRepository.html#a281b22cacdd4f323ab262ea7ec8d2a84',1,'App::Repositories::AsignaturasJsonRepository']]],
+  ['_24archivomensajes_2',['$archivoMensajes',['../classApp_1_1Repositories_1_1MensajesJsonRepository.html#a3c693a00f1a592b983dc696b446017cf',1,'App::Repositories::MensajesJsonRepository']]],
+  ['_24archivousuarios_3',['$archivoUsuarios',['../classApp_1_1Repositories_1_1UsersJsonRepository.html#a82b1947ab252799e7f00e6a3ae953e3f',1,'App::Repositories::UsersJsonRepository']]],
+  ['_24contenido_4',['$contenido',['../classApp_1_1Models_1_1Mensaje.html#a8a5bc19244860c7ce0fa69267ba71ccc',1,'App::Models::Mensaje']]],
+  ['_24email_5',['$email',['../classApp_1_1Models_1_1User.html#ab7ab6fdd120f6cbac9550bd5463435c8',1,'App::Models::User']]],
+  ['_24estadomensaje_6',['$estadoMensaje',['../classApp_1_1Models_1_1Mensaje.html#a1ceab8fd15dfe07084bd4a0a5c13068f',1,'App::Models::Mensaje']]],
+  ['_24id_7',['$id',['../classApp_1_1Models_1_1Mensaje.html#afe21ee30aed8409bbae27fe5b95c6515',1,'App\Models\Mensaje\$id'],['../classApp_1_1Models_1_1User.html#a3922c6841bc27f3f4879fc8ded0efaf8',1,'App\Models\User\$id'],['../classApp_1_1Models_1_1Asignatura.html#a2ad20bce764b683af2404e7c29f69db3',1,'App\Models\Asignatura\$id']]],
+  ['_24idasignatura_8',['$idAsignatura',['../classApp_1_1Models_1_1Mensaje.html#a30e5be699f9db574899111752706b0a5',1,'App::Models::Mensaje']]],
+  ['_24idusuario_9',['$idUsuario',['../classApp_1_1Models_1_1Mensaje.html#a102c12c5aee0001de21e42de4ebddbda',1,'App::Models::Mensaje']]],
+  ['_24modooscuroactivado_10',['$modoOscuroActivado',['../classApp_1_1Models_1_1User.html#a3f2b2b3bfa39ba75b173851f3c13ad73',1,'App::Models::User']]],
+  ['_24nombre_11',['$nombre',['../classApp_1_1Models_1_1Asignatura.html#a4367121d1768ef7ece51b2225f75b43e',1,'App\Models\Asignatura\$nombre'],['../classApp_1_1Models_1_1User.html#a86650475f2febf1a6481a3365ea48849',1,'App\Models\User\$nombre']]],
+  ['_24palabrasvetadas_12',['$palabrasVetadas',['../classApp_1_1Models_1_1Mensaje.html#ae10f5e60264f47abcfb7b8f59348eb0d',1,'App::Models::Mensaje']]],
+  ['_24passhasheada_13',['$passHasheada',['../classApp_1_1Models_1_1User.html#a9e8eb7d20da620989ed47c22a4ac0bdf',1,'App::Models::User']]],
+  ['_24password_14',['$password',['../classDatabase_1_1Factories_1_1UserFactory.html#a26ffb3936aed634f3ad7be79997ffe3a',1,'Database::Factories::UserFactory']]],
+  ['_24repositoriomensajes_15',['$repositorioMensajes',['../classApp_1_1Models_1_1User.html#a9c947e4caa0d2bad8cc6a93427f83e94',1,'App::Models::User']]],
+  ['_24repositoriousuarios_16',['$repositoriousuarios',['../classApp_1_1Http_1_1Middleware_1_1NecesitaRol.html#a86359eaee3070ce7ce249297049ba51d',1,'App\Http\Middleware\NecesitaRol\$repositorioUsuarios'],['../classApp_1_1Providers_1_1UsuarioProvider.html#abd618b90950eba0b527108962b2cd77e',1,'App\Providers\UsuarioProvider\$repositorioUsuarios']]],
+  ['_24rol_17',['$rol',['../classApp_1_1Models_1_1User.html#a188c3118b841d66e0577222d118a1ea8',1,'App::Models::User']]],
+  ['_24rutaarchivo_18',['$rutaArchivo',['../classApp_1_1Repositories_1_1JsonDb.html#ada6490d730ef658bde42f34685345362',1,'App::Repositories::JsonDb']]],
+  ['_24timestampcreacion_19',['$timestampCreacion',['../classApp_1_1Models_1_1Mensaje.html#a86ccfc3045f46e85564084585e0c7ff9',1,'App::Models::Mensaje']]]
+];

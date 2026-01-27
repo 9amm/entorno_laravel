@@ -1,0 +1,63 @@
+\doxysection{Referencia de la clase App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Necesita\+Rol}
+\hypertarget{classApp_1_1Http_1_1Middleware_1_1NecesitaRol}{}\label{classApp_1_1Http_1_1Middleware_1_1NecesitaRol}\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}}
+
+
+Diagrama de colaboración de App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Necesita\+Rol\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classApp_1_1Http_1_1Middleware_1_1NecesitaRol__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a8fe952d6baa66a5c0819d34f8a0fcc41}{\+\_\+\+\_\+construct}} (\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}} \$repositorio\+Usuarios)
+\item 
+\mbox{\hyperlink{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a9cc5a24f962db23b701b3a588e44afc6}{handle}} (Request \$request, Closure \$next, string \$rol)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}} \mbox{\hyperlink{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a86359eaee3070ce7ce249297049ba51d}{\$repositorio\+Usuarios}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a8fe952d6baa66a5c0819d34f8a0fcc41}\label{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a8fe952d6baa66a5c0819d34f8a0fcc41} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+Necesita\+Rol\+::\+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}}}]{\$repositorio\+Usuarios }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a9cc5a24f962db23b701b3a588e44afc6}\label{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a9cc5a24f962db23b701b3a588e44afc6} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}!handle@{handle}}
+\index{handle@{handle}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+Necesita\+Rol\+::handle (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{Closure}]{\$next,  }\item[{string}]{\$rol }\end{DoxyParamCaption})}
+
+Comprueba que el usuario logueado tenga el rol que se pase como parametro, si no lo tiene se muestra la pagina de no encontrado (404)
+
+
+\begin{DoxyParams}{Parámetros}
+{\em } & \\
+\hline
+\end{DoxyParams}
+Closure(\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request)\+: (\textbackslash{}\+Symfony\textbackslash{}\+Component\textbackslash{}\+Http\+Foundation\textbackslash{}\+Response) \$next 
+
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a86359eaee3070ce7ce249297049ba51d}\label{classApp_1_1Http_1_1Middleware_1_1NecesitaRol_a86359eaee3070ce7ce249297049ba51d} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}!\$repositorioUsuarios@{\$repositorioUsuarios}}
+\index{\$repositorioUsuarios@{\$repositorioUsuarios}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}NecesitaRol}}
+\doxysubsubsection{\texorpdfstring{\$repositorioUsuarios}{\$repositorioUsuarios}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}} App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+Necesita\+Rol\+::\$repositorio\+Usuarios\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Middleware/\mbox{\hyperlink{NecesitaRol_8php}{Necesita\+Rol.\+php}}\end{DoxyCompactItemize}

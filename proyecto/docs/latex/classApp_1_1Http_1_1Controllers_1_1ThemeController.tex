@@ -1,0 +1,45 @@
+\doxysection{Referencia de la clase App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Theme\+Controller}
+\hypertarget{classApp_1_1Http_1_1Controllers_1_1ThemeController}{}\label{classApp_1_1Http_1_1Controllers_1_1ThemeController}\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController}}
+
+
+Diagrama de herencia de App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Theme\+Controller
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classApp_1_1Http_1_1Controllers_1_1ThemeController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagrama de colaboración de App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Theme\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classApp_1_1Http_1_1Controllers_1_1ThemeController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classApp_1_1Http_1_1Controllers_1_1ThemeController_a1cac900e72dff321d9a27044446641b7}{set\+Tema}} (Request \$peticion, \mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}} \$repositorio\+Usuarios)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classApp_1_1Http_1_1Controllers_1_1ThemeController_a1cac900e72dff321d9a27044446641b7}\label{classApp_1_1Http_1_1Controllers_1_1ThemeController_a1cac900e72dff321d9a27044446641b7} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController}!setTema@{setTema}}
+\index{setTema@{setTema}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}ThemeController}}
+\doxysubsubsection{\texorpdfstring{setTema()}{setTema()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Theme\+Controller\+::set\+Tema (\begin{DoxyParamCaption}\item[{Request}]{\$peticion,  }\item[{\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IUsersRepository}{IUsers\+Repository}}}]{\$repositorio\+Usuarios }\end{DoxyParamCaption})}
+
+Para cada cuenta de la red social guardamos que tema prefiere, si prefiere modo claro o prefiere modo oscuro.
+
+El usuario puede cambiar el tema desde la interfaz, cuando lo haga necesitamos guardar ese cambio en el servidor para que cuando inicie sesion desde otros dispositivos la web se muestre con el tema seleccionado.
+
+Esta funcion es la que se encarga de guardar el nuevo cambio de tema en el servidor, lee los datos que se envian en el cuerpo de la peticion POST, valida que cumpan un formato y los guarda. 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Controllers/\mbox{\hyperlink{ThemeController_8php}{Theme\+Controller.\+php}}\end{DoxyCompactItemize}

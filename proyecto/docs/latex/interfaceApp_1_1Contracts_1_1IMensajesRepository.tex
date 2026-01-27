@@ -1,0 +1,143 @@
+\doxysection{Referencia de la interface App\textbackslash{}Contracts\textbackslash{}IMensajes\+Repository}
+\hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository}{}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository}\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+
+
+Diagrama de herencia de App\textbackslash{}Contracts\textbackslash{}IMensajes\+Repository
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{interfaceApp_1_1Contracts_1_1IMensajesRepository__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab6168c3ec1c1baa5b907e33ea510d772}{get\+All}} ()
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a20bf4865ce619e4b2b07e0734d434b7d}{save}} (\mbox{\hyperlink{classApp_1_1Models_1_1Mensaje}{Mensaje}} \$mensaje)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a83f1bb6736a34bedbd011df31e1b9587}{update}} (\mbox{\hyperlink{classApp_1_1Models_1_1Mensaje}{Mensaje}} \$mensaje)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab4a633bab6a1f3928a7d6d86a963a95d}{get\+By\+Id}} (\$id)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a6c0265856db15c69531fc65453c5853d}{get\+By\+User}} (\mbox{\hyperlink{classApp_1_1Models_1_1User}{User}} \$usuario)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a276f5c6502181e0e5b696d1fc9e81781}{get\+By\+Estado}} (string \$estado)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a39182b045805d22f1930b9de703ffc28}{get\+By\+Estados}} (array \$estados)
+\item 
+\mbox{\hyperlink{interfaceApp_1_1Contracts_1_1IMensajesRepository_a1569c1245972c44df634cd75c21e4179}{get\+By\+Asignatura}} (int \$id\+Asignatura)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab6168c3ec1c1baa5b907e33ea510d772}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab6168c3ec1c1baa5b907e33ea510d772} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getAll@{getAll}}
+\index{getAll@{getAll}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getAll()}{getAll()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Devuelve}
+array un array de objetos Mensaje 
+\end{DoxyReturn}
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a65f949ce1f0fdd79ec368821aa74b13f}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a1569c1245972c44df634cd75c21e4179}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a1569c1245972c44df634cd75c21e4179} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getByAsignatura@{getByAsignatura}}
+\index{getByAsignatura@{getByAsignatura}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getByAsignatura()}{getByAsignatura()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+By\+Asignatura (\begin{DoxyParamCaption}\item[{int}]{\$id\+Asignatura }\end{DoxyParamCaption})}
+
+a partir del id de una asignatura devuelve un array con todos los mensajes que existen sobre esa asignatura, sin importar su estado 
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a69834a854cedd4ade2c15a7e3142dda6}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a276f5c6502181e0e5b696d1fc9e81781}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a276f5c6502181e0e5b696d1fc9e81781} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getByEstado@{getByEstado}}
+\index{getByEstado@{getByEstado}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getByEstado()}{getByEstado()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+By\+Estado (\begin{DoxyParamCaption}\item[{string}]{\$estado }\end{DoxyParamCaption})}
+
+Devuelve todos los mensajes con el estado que se pase como parametro \begin{DoxySeeAlso}{Ver también}
+Estados\+Mensaje 
+\end{DoxySeeAlso}
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a462cb7197a57d14a4a67b987922e6cd0}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a39182b045805d22f1930b9de703ffc28}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a39182b045805d22f1930b9de703ffc28} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getByEstados@{getByEstados}}
+\index{getByEstados@{getByEstados}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getByEstados()}{getByEstados()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+By\+Estados (\begin{DoxyParamCaption}\item[{array}]{\$estados }\end{DoxyParamCaption})}
+
+devuelve los mensajes que tienen un estado incluido en en una lista de estados que se pasan como parametro
+
+util si por ejemplo quieres obtener una lista con los mensajes con estado pendiente y peligroso
+
+
+\begin{DoxyParams}{Parámetros}
+{\em array} & una lista de estados de mensaje \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+Estados\+Mensaje 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Devuelve}
+array una lista con los mensajes que tienen de estado alguno de los estados que se pasan como parametro 
+\end{DoxyReturn}
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a8568d0df345d16cd95a6e49e20fad103}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab4a633bab6a1f3928a7d6d86a963a95d}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_ab4a633bab6a1f3928a7d6d86a963a95d} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getById@{getById}}
+\index{getById@{getById}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getById()}{getById()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+By\+Id (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a31ee8ce6015984c6e6cb9a3faaac3b3e}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a6c0265856db15c69531fc65453c5853d}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a6c0265856db15c69531fc65453c5853d} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!getByUser@{getByUser}}
+\index{getByUser@{getByUser}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{getByUser()}{getByUser()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::get\+By\+User (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classApp_1_1Models_1_1User}{User}}}]{\$usuario }\end{DoxyParamCaption})}
+
+Devuelve un array con todos los mensajes que ha publicado el usuario que se pase como parametro \begin{DoxyReturn}{Devuelve}
+array un array de objetos Mensaje 
+\end{DoxyReturn}
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_ad7bfdbc3f62b29bc6bb1eba6db3be987}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a20bf4865ce619e4b2b07e0734d434b7d}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a20bf4865ce619e4b2b07e0734d434b7d} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!save@{save}}
+\index{save@{save}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classApp_1_1Models_1_1Mensaje}{Mensaje}}}]{\$mensaje }\end{DoxyParamCaption})}
+
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a180cb929c6b20212a12050507d65fd7a}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+\Hypertarget{interfaceApp_1_1Contracts_1_1IMensajesRepository_a83f1bb6736a34bedbd011df31e1b9587}\label{interfaceApp_1_1Contracts_1_1IMensajesRepository_a83f1bb6736a34bedbd011df31e1b9587} 
+\index{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}!update@{update}}
+\index{update@{update}!App\textbackslash{}Contracts\textbackslash{}IMensajesRepository@{App\textbackslash{}Contracts\textbackslash{}IMensajesRepository}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Contracts\textbackslash{}\+IMensajes\+Repository\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classApp_1_1Models_1_1Mensaje}{Mensaje}}}]{\$mensaje }\end{DoxyParamCaption})}
+
+
+
+Implementado en \mbox{\hyperlink{classApp_1_1Repositories_1_1MensajesJsonRepository_a43cc5bf5ef3be7ebd94a518c33e49240}{App\textbackslash{}\+Repositories\textbackslash{}\+Mensajes\+Json\+Repository}}.
+
+
+
+La documentación de esta interface está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+app/\+Contracts/\mbox{\hyperlink{IMensajesRepository_8php}{IMensajes\+Repository.\+php}}\end{DoxyCompactItemize}
