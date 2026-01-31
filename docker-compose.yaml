@@ -13,3 +13,30 @@ services:
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./proyecto:/var/www/proyecto:cached
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
+    
+
+  mariadb:
+    image: mariadb:12.0
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: test
+      #por defecto este usuario ya tiene todos los permiso
+      MARIADB_USER: red
+      MARIADB_PASSWORD: contra
+      MARIADB_DATABASE: red_social
+    volumes:
+      - ./proyecto/database/sql:/docker-entrypoint-initdb.d
+      - bd_red_social:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    ports:
+      - 5500:80
+    environment:
+      MYSQL_ROOT_PASSWORD: prueba
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+
+volumes:
+  bd_red_social:
