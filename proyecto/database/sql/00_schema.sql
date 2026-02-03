@@ -24,6 +24,10 @@ create table if not exists mensaje (
     -- nosotros desde php
     timestamp_creacion varchar(255) not null,
 
-    foreign key (id_asignatura) references asignatura(id),
+    foreign key (id_asignatura) references asignatura(id)
+        on delete cascade
+        on update cascade
     foreign key (id_usuario) references usuario(id)
+        on delete cascade
+        on update cascade
 );
