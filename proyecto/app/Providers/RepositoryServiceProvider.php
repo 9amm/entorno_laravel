@@ -6,7 +6,7 @@ use App\Contracts\IAsignaturasRepository;
 use App\Contracts\IMensajesRepository;
 use App\Contracts\IUsersRepository;
 use App\Repositories\AsignaturasMariaDBRepository;
-use App\Repositories\MensajesJsonRepository;
+use App\Repositories\MensajesMariaDBRepository;
 use App\Repositories\UsersMariaDBRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,7 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(IMensajesRepository::class, function ($app) {
-            return new MensajesJsonRepository();
+            return new MensajesMariaDBRepository();
         });
 
         $this->app->bind(IAsignaturasRepository::class, function ($app) {
