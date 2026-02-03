@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Contracts\IAsignaturasRepository;
 use App\Contracts\IMensajesRepository;
 use App\Contracts\IUsersRepository;
-use App\Repositories\AsignaturasJsonRepository;
+use App\Repositories\AsignaturasMariaDBRepository;
 use App\Repositories\MensajesJsonRepository;
 use App\Repositories\UsersJsonRepository;
 use Illuminate\Support\ServiceProvider;
@@ -25,7 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(IAsignaturasRepository::class, function ($app) {
-            return new AsignaturasJsonRepository();
+            return new AsignaturasMariaDBRepository();
         });
     }
 
