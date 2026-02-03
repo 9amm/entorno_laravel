@@ -10,51 +10,49 @@ use stdClass;
 class UsersMariaDBRepository implements IUsersRepository{
 
     function save(User $usuario): void {
-        $usuario = [
+        DB::table('usuarios')->insert([
             "id" => $usuario->id,
             "nombre" => $usuario->nombre,
             "email" => $usuario->email,
             "pass_hasheada" => $usuario->passHasheada,
             "rol" => $usuario->rol,
             "modo_oscuro_activado" => $usuario->modoOscuroActivado,
-        ];
-        DB::insert("insert into `usuario` (`id`, `nombre`, `email`, `pass_hasheada`, `rol`, `modo_oscuro_activado`) values (:id, :nombre, :email, :pass_hasheada, :rol, :modo_oscuro_activado);", $usuario);
+        ]);
     }
 
     function update(User $usuario): void {
-        $usuario = [
+        DB::table("usuarios")
+        -> where("id", $usuario->id)
+        ->update([
             "id" => $usuario->id,
             "nombre" => $usuario->nombre,
             "email" => $usuario->email,
             "pass_hasheada" => $usuario->passHasheada,
             "rol" => $usuario->rol,
             "modo_oscuro_activado" => $usuario->modoOscuroActivado,
-        ];
-        DB::update('update usuario set nombre = :nombre, email = :email, pass_hasheada = :pass_hasheada, rol = :rol, modo_oscuro_activado = :modo_oscuro_activado where id = :id', $usuario);
+        ]);
     }
 
 
     function getById($id): ?User {
-        $usuarioEncontrado = DB::select("select * from usuario where id = ?", [$id])[0] ?? null;
+        $usuarioEncontrado = DB::table('usuario')->find($id);
 
-        if($usuarioEncontrado == null) {
-            return null;
+        if($usuarioEncontrado != null) {
+            $usuarioEncontrado = $this->arrayAUsuario($usuarioEncontrado);
         }
-
-        return $this->arrayAUsuario($usuarioEncontrado);
+        return $usuarioEncontrado;
     }
 
 
 
 
     function getByEmail(string $email): ?User {
-        $usuarioEncontrado = DB::select("select * from usuario where email = ?", [$email])[0] ?? null;
+        $usuarioEncontrado = DB::table('usuario')->find($email);
 
-        if($usuarioEncontrado == null) {
-            return null;
+        if($usuarioEncontrado != null) {
+            $usuarioEncontrado = $this->arrayAUsuario($usuarioEncontrado);
         }
-
-        return $this->arrayAUsuario($usuarioEncontrado);
+        return $usuarioEncontrado;
     }
 
 
@@ -62,13 +60,12 @@ class UsersMariaDBRepository implements IUsersRepository{
 
     //TODO: codigo muy parecido
     function getByNombre(string $nombre): ?User {
-        $usuarioEncontrado = DB::select("select * from usuario where nombre = ?", [$nombre])[0] ?? null;
+        $usuarioEncontrado = DB::table('usuario')->find($nombre);
 
-        if($usuarioEncontrado == null) {
-            return null;
+        if($usuarioEncontrado != null) {
+            $usuarioEncontrado = $this->arrayAUsuario($usuarioEncontrado);
         }
-
-        return $this->arrayAUsuario($usuarioEncontrado);
+        return $usuarioEncontrado;
     }
 
 
