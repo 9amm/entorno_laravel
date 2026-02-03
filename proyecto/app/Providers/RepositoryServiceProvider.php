@@ -7,7 +7,7 @@ use App\Contracts\IMensajesRepository;
 use App\Contracts\IUsersRepository;
 use App\Repositories\AsignaturasMariaDBRepository;
 use App\Repositories\MensajesJsonRepository;
-use App\Repositories\UsersJsonRepository;
+use App\Repositories\UsersMariaDBRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -17,7 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void {
         $this->app->bind(IUsersRepository::class, function ($app) {
-            return new UsersJsonRepository();
+            return new UsersMariaDBRepository();
         });
 
         $this->app->bind(IMensajesRepository::class, function ($app) {

@@ -5,7 +5,7 @@ create table if not exists usuario (
     pass_hasheada varchar(255) not null,
     -- TODO: mejor crear tabla rol
     rol varchar(80) not null,
-    modoOscuroActivado boolean not null default 0
+    modo_oscuro_activado boolean not null default 0
 );
 
 create table if not exists asignatura (
