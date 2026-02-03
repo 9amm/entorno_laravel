@@ -1,5 +1,7 @@
 services:
   php_apache:
+    depends_on:
+      - mariadb
     user: "1000:1000"
     container_name: php_apache_laravel
     build: 
@@ -33,6 +35,8 @@ services:
     image: phpmyadmin:5.2
     ports:
       - 5500:80
+    depends_on:
+      - mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       PMA_HOST: mariadb
