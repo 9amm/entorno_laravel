@@ -47,7 +47,7 @@ class UsersMariaDBRepository implements IUsersRepository{
 
 
     function getByEmail(string $email): ?User {
-        $usuarioEncontrado = DB::table('usuario')->find($email);
+        $usuarioEncontrado = DB::table('usuario')->where("email", $email)->first();
 
         if($usuarioEncontrado != null) {
             $usuarioEncontrado = $this->arrayAUsuario($usuarioEncontrado);
@@ -60,7 +60,7 @@ class UsersMariaDBRepository implements IUsersRepository{
 
     //TODO: codigo muy parecido
     function getByNombre(string $nombre): ?User {
-        $usuarioEncontrado = DB::table('usuario')->find($nombre);
+        $usuarioEncontrado = DB::table('usuario')->where("nombre", $nombre)->first();
 
         if($usuarioEncontrado != null) {
             $usuarioEncontrado = $this->arrayAUsuario($usuarioEncontrado);
