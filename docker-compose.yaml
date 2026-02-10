@@ -1,5 +1,7 @@
 services:
   php_apache:
+    depends_on:
+      - mariadb
     user: "1000:1000"
     container_name: php_apache_laravel
     build: 
@@ -13,3 +15,32 @@ services:
       - ./configuracion/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./proyecto:/var/www/proyecto:cached
       - ./configuracion/xdebug_configuracion.ini:/usr/local/etc/php/conf.d/xdebug_configuracion.ini
+    
+
+  mariadb:
+    image: mariadb:12.0
+    ports:
+      - ${DB_PORT}:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      #por defecto este usuario ya tiene todos los permiso
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ./proyecto/database/sql:/docker-entrypoint-initdb.d
+      - bd_red_social:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    ports:
+      - 5500:80
+    depends_on:
+      - mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      PMA_HOST: mariadb
+      PMA_PORT: ${DB_PORT}
+
+volumes:
+  bd_red_social:
