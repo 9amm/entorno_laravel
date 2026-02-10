@@ -29,7 +29,7 @@ class AsignaturasMariaDBRepository implements IAsignaturasRepository{
     }
 
     function save(Asignatura $asignatura): void {
-        DB::table('usuarios')->insert([
+        DB::table('asignatura')->insert([
             "id" => null,
             "nombre" => $asignatura->nombre 
         ]);
