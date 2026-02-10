@@ -8,6 +8,8 @@ services:
       context: .
       # a partir de una imagen personalizada con mysqli instalado
       dockerfile: php_apache_laravel.Dockerfile
+    env_file:
+      - .env
     ports:
       - 80:80
     volumes:
@@ -39,7 +41,7 @@ services:
       - mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      PMA_HOST: mariadb
+      PMA_HOST: ${DB_HOST}
       PMA_PORT: ${DB_PORT}
 
 volumes:
