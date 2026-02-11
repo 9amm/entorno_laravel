@@ -72,12 +72,12 @@ class RegisterController extends Controller {
                         //creamos un usuario con los datos del formluario
                         $nuevoUsuario = new User($nombreUsuario, $email, $pass, $rol);
                         //guardamos el usuario en la bd
-                        $repositorioUsuarios->save($nuevoUsuario);
+                        $usuarioInsertado = $repositorioUsuarios->save($nuevoUsuario);
 
 
                         //guardamos en la sesion el usuario que se acaba de crear para que en la
                         //proximas peticiones no se le pida iniciar sesion
-                        Auth::login($nuevoUsuario);
+                        Auth::login($usuarioInsertado);
                         return redirect()->route("inicio");
 
                     } else {

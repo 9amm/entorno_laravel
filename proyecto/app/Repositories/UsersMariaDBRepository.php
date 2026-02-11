@@ -9,19 +9,20 @@ use stdClass;
 
 class UsersMariaDBRepository implements IUsersRepository{
 
-    function save(User $usuario): void {
-        DB::table('usuarios')->insert([
-            "id" => $usuario->id,
+    function save(User $usuario): User {
+        $idGenerado = DB::table('usuario')->insertGetId([
             "nombre" => $usuario->nombre,
             "email" => $usuario->email,
             "pass_hasheada" => $usuario->passHasheada,
             "rol" => $usuario->rol,
             "modo_oscuro_activado" => $usuario->modoOscuroActivado,
         ]);
+        $usuario->id = $idGenerado;
+        return $usuario;
     }
 
     function update(User $usuario): void {
-        DB::table("usuarios")
+        DB::table("usuario")
         -> where("id", $usuario->id)
         ->update([
             "id" => $usuario->id,

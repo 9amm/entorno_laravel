@@ -4,7 +4,7 @@ namespace App\Contracts;
 use App\Models\User;
 
 interface IUsersRepository {
-    function save(User $usuario): void;
+    function save(User $usuario): User;
 
     function update(User $usuario): void;
 

@@ -18,13 +18,14 @@ class UsersJsonRepository implements IUsersRepository{
 
 
 
-    function save(User $usuario): void {
+    function save(User $usuario): User {
         $contenidoArchivo = $this->archivoUsuarios->leer();
         $usuario->id = ++$contenidoArchivo["ultimoId"];
 
         $contenidoArchivo["items"][$usuario->id] = $usuario;
 
         $this->archivoUsuarios->escribir((array) $contenidoArchivo);
+        return $usuario;
     }
 
     function update(User $usuario): void {
