@@ -21,7 +21,8 @@ class ThemeController extends Controller {
      * un formato y los guarda.
      */
     function setTema(Request $peticion, IUsersRepository $repositorioUsuarios, ThemeService $themeService) {
-        $modoOscuroActivado = $peticion->input("modoOscuroActivado", "");
+        $modoOscuroActivado = $peticion->boolean("modoOscuroActivado");
+
         $usuario = $peticion->user();
         $themeService->setTema($modoOscuroActivado, $usuario, $repositorioUsuarios);
     }
