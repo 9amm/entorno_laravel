@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Contracts\IUsersRepository;
-use App\Services\ThemeService;
-use Illuminate\Http\Request;
 
-class ThemeController extends Controller {
+class ThemeService {
 
     /**
      * Para cada cuenta de la red social guardamos que tema prefiere,
@@ -20,10 +18,15 @@ class ThemeController extends Controller {
      * lee los datos que se envian en el cuerpo de la peticion POST, valida que cumpan
      * un formato y los guarda.
      */
-    function setTema(Request $peticion, IUsersRepository $repositorioUsuarios, ThemeService $themeService) {
-        $modoOscuroActivado = $peticion->input("modoOscuroActivado", "");
-        $usuario = $peticion->user();
-        $themeService->setTema($modoOscuroActivado, $usuario, $repositorioUsuarios);
+    function setTema($modoOscuroActivado, $usuario, IUsersRepository $repositorioUsuarios) {
+
+        if ($modoOscuroActivado != "true" && $modoOscuroActivado != "false") {
+            echo("valor no valido");
+        } else {
+            $usuario->setModoOscuroActivado($modoOscuroActivado == "true");
+            $repositorioUsuarios->update($usuario);
+        }
+    
     }
 
 }
