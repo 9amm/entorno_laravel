@@ -58,6 +58,22 @@ class Mensaje {
     }
 
     /**
+     * comprueba que si el mensaje tiene palabras vetadas , y 
+     * devuelve el estado que deberia tener el mensaje
+     * por ejemplo si el mensaje que se pasa como parametro tiene insultos
+     * el estado sera peligroso
+     */
+    static function calcularEstadoMensaje(string $contenidoMensaje): string {
+        $estado = "";
+        if(self::contienePalabrasVetadas($contenidoMensaje)) {
+            $estado = EstadosMensaje::PELIGROSO;
+        }else{
+            $estado = EstadosMensaje::PENDIENTE;
+        }
+        return $estado;
+    }
+
+    /**
      * Devuelve el usuario que creo el mensaje
      */
     function getUsuario(): ?User {

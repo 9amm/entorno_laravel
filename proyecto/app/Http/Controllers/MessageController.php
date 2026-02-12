@@ -6,6 +6,7 @@ use App\Contracts\IAsignaturasRepository;
 use App\Contracts\IMensajesRepository;
 use App\Models\EstadosMensaje;
 use App\Models\Mensaje;
+use App\Services\MessageService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -48,7 +49,7 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas) {
+    public function store(Request $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas, MessageService $messageService) {
 
         $usuarioLogeado = $peticion->user();
 
@@ -64,28 +65,18 @@ class MessageController extends Controller
             $respuesta = view("error", [ "mensaje" => "Longitud del mensaje no valida."]);
 
         } else {
-            $idAsignturaExiste = $repositorioAsignaturas->getById($idAsignatura) != null;
+            $asignatura = $repositorioAsignaturas->getById($idAsignatura);
 
-            if($idAsignturaExiste) {
+            if($asignatura != null) {
+                $mensajeCreado = $messageService->guardar($contenidoMensaje,$usuarioLogeado, $asignatura, $repositorioMensajes);
 
-                if(Mensaje::contienePalabrasVetadas($contenidoMensaje)) {
-                    $estado = EstadosMensaje::PELIGROSO;
-                    $mensajeAlerta = "Hemos detectado que el mensaje contiene palabras vetadas, el mensaje queda pendiente de revisión por parte de un moderador.";
-                }else{
-                    $estado = EstadosMensaje::PENDIENTE;   
+                if($mensajeCreado->tieneEstado(EstadosMensaje::PELIGROSO)) {
+                    $mensajeAlerta = "Hemos detectado que el mensaje contiene 
+                        palabras vetadas, el mensaje queda pendiente de revisión
+                        por parte de un moderador.";
+                } else if($mensajeCreado->tieneEstado(EstadosMensaje::PENDIENTE)){
                     $mensajeAlerta = "Mensaje creado correctamente, queda pendiente de moderar.";
                 }
-                
-                $mensaje = new Mensaje(
-                    contenido: $contenidoMensaje,
-                    idAsignatura: $idAsignatura,
-                    idUsuario: $usuarioLogeado->id,
-                    estadoMensaje: $estado,
-                    timestampCreacion: time()
-                );
-                
-                //guardamos el mensaje en la bd
-                $repositorioMensajes->save($mensaje);
 
                 $respuesta = view("error", [
                     "mensaje" => $mensajeAlerta,
