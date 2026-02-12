@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\IUsersRepository;
+use App\Services\LoginService;
+use App\Services\ThemeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -13,7 +15,7 @@ class LoginController extends Controller {
         return view("login");
     }
 
-    function login(Request $peticion) {
+    function login(Request $peticion, LoginService $loginService, ThemeService $themeService) {
         $usuario = $peticion->input("usuario", "");
 
         //la contraseña que se envia hasheada desde el frontend
@@ -23,22 +25,17 @@ class LoginController extends Controller {
 
 
         if(!empty($usuario) && !empty($pass)) {
+            $usuarioLogueado = $loginService->login($usuario, $pass);
 
-            $datosLogin =[
-                "usuario" => $usuario,
-                "pass" => $pass
-            ];
+            if($usuarioLogueado != null) {
+                $themeService->crearCookieParaUsuario($usuarioLogueado);
 
-            if(Auth::attempt($datosLogin)) {
-                //los colores de la pagina dependiendo de si el modo oscuro esta activado o no
-                setcookie("modoOscuroActivado", $peticion->user()->getModoOscuroActivado() ? "true":"false");
                 $peticion->session()->regenerate();
-
                 $respuesta = redirect()->intended();
-
             } else {
                 $respuesta = view("alerta_auth", ["mensaje" => "Datos de inicio de sesión no válidos"]);
             }
+
         } else {
             $respuesta = view("alerta_auth", ["mensaje" => "Cubre todos los campos"]);
         }
