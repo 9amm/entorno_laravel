@@ -4,6 +4,57 @@ Version de php que usamos 8.4.15
 
 Versión de laravel 12.39
 
+# Base de Datos
+SGBD Elegido: **MariaDB**
+Se ha seleccionado MariaDB como Sistema Gestor de Base de Datos principalmente por que la imagen de mariadb es mas sencilla de utilizar que la de mysql los ademas de la compatibilidad Total, funcionando como un reemplazo directo de MySQL, permitiendo usar los drivers y herramientas estándar de Laravel sin fricción. Y su
+Integridad Referencial que nos permite definir relaciones sólidas (Foreign Keys) para asegurar la consistencia entre usuarios, sus mensajes y las asignaturas correspondientes.
+
+Resumen de las Tablas Creadas
+Basado en el modelo Entidad-Relación implementado, la estructura de la base de datos se compone de las siguientes tablas y columnas principales:
+
+usuario: Almacena los datos de perfil y preferencias del usuario.
+
+id (PK): Identificador único.
+
+nombre: Nombre de usuario.
+
+email: Correo electrónico institucional.
+
+pass_hasheada: Hash seguro de la contraseña.
+
+rol: Tipo de usuario (Alumno/Profesor).
+
+modo_oscuro_activado: Estado de preferencia de la interfaz.
+
+mensaje: Contiene las publicaciones realizadas por los usuarios.
+
+id (PK): Identificador del mensaje.
+
+contenido: Texto íntegro de la publicación.
+
+estado_mensaje: Estado actual (ej. publicado, pendiente, moderado).
+
+timestamp_creacion: Fecha y hora exacta de la publicación.
+
+usuario_id (FK): Relación 1:N (un usuario publica muchos mensajes).
+
+asignatura_id (FK): Relación N:1 (muchos mensajes tratan sobre una asignatura).
+
+asignatura: Entidades académicas sobre las que se puede conversar.
+
+id (PK): Código único de la asignatura.
+
+nombre: Nombre oficial de la materia.
+
+## Usuarios de Prueba
+
+Para verificar la funcionalidad de la práctica, se han generado los siguientes usuarios mediante el comando `app:datos-prueba`.
+
+| Rol | Usuario | Contraseña | Notas |
+| :--- | :--- | :--- | :--- |
+| **Alumno** | `alumno1` | `@Holaquetal` | Acceso estándar a foros. |
+| **Profesor** | `profesor1` | `@Holaquetal` | Permisos de moderación. |
+
 # ¿Por que laravel?
 
 Se ha elegido **Laravel** frente a otras alternativas como **Slim** o **Symfony** por su equilibrio entre facilidad de uso y potencia. Mientras que Slim es un micro-framework que hubiera requerido la instalación manual de múltiples paquetes externos para gestionar sesiones y plantillas, Laravel ofrece una solución integral que acelera el desarrollo. Por otro lado, aunque Symfony es un framework muy robusto, su curva de aprendizaje y configuración de servicios es más compleja para los objetivos de esta práctica.
@@ -145,12 +196,36 @@ Seguridad de sesion, laravel gestiona la rotación de IDs de sesión y la protec
 Primero entramos al terminal en el contenedor desde la raíz del proyecto y ejecutamos el comando: "doxygen", esto genera automaticamente una carpeta en docs con toda la nueva documentación.
 Para encontrarlo tenemos que entrar en docs/html y abrir el archivo index.html.
 
-## Instalacion
 
-Clonar el proyecto y situarse en la raiz
+## 1. Clonar el repositorio
+git clone <url-del-repositorio>
+cd <nombre-carpeta>
 
+## 2. Configuración de Variables de Entorno (.env)
 
-Ejecutar “docker compose up”
+Es necesario configurar dos archivos .env:
+
+Raíz del proyecto (Docker)
+
+Copia el archivo .env.example a .env y define los puertos y credenciales de MariaDB.
+
+Carpeta src/app (Laravel)
+
+Copia el archivo .env.example a .env y asegúrate de que la variable DB_HOST coincida con el nombre del servicio de base de datos definido en Docker.
+
+## 3. Levantar los contenedores
+docker compose up -d
+
+## 4. Instalación de dependencias y configuración de la base de datos
+
+Accede al contenedor de la aplicación y ejecuta la configuración inicial:
+
+docker compose exec app bash
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan app:datos-prueba
+
 
 
 
