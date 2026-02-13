@@ -76,6 +76,7 @@ url()→previous(): cuando un usuario intenta acceder a una parte de la red soci
 
 # Listado de rutas y roles
 
+
 Autenticación
 
 | Métdo | Ruta      | Descripción                           | Autenticación |
@@ -86,11 +87,13 @@ Autenticación
 | POST  | /register | Procesar registro del usuario         | No            |
 | POST  | /logout   | Cerrar la sesión del usuario          | Si            |
 
+
 Página principal
 
 | Métdo | Ruta | Descripción      | Autenticación | Rol   |
 | ----- | ---- | ---------------- | ------------- | ----- |
 | GET   | /    | Página principal | Si            | Todos |
+
 
 Asignaturas
 
@@ -99,12 +102,14 @@ Asignaturas
 | GET   | /subjects             | Listado de todas las asignaturas  | Si            | Todos |
 | GET   | /subjects{asignatura} | Mensajes de asignatura específica | Si            | Todos |
 
+
 Mensajes
 
 | Métdo | Ruta          | Descripción                       | Autenticación | Rol   |
 | ----- | ------------- | --------------------------------- | ------------- | ----- |
 | POST  | /messages     | Publicar un nuevo mensaje         | Si            | Todos |
 | GET   | /messages/new | Formulario de creación de mensaje | Si            | Todos |
+
 
 Moderación
 
@@ -113,11 +118,13 @@ Moderación
 | GET   | /moderation                    | Lista de mensajes pendientes de moderar | Si            | Profesor |
 | POST  | /moderation/{mensaje}/{accion} | Aprobar o rechazar                      | Si            | Profesor |
 
+
 Tema
 
 | Métdo | Ruta   |
 | ----- | ------ |
 | POST  | /theme |
+
 
 ## Explicación de validación y sanitización implementada.
 
@@ -144,5 +151,6 @@ Clonar el proyecto y situarse en la raiz
 
 
 Ejecutar “docker compose up”
+
 
 
