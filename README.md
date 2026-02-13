@@ -214,7 +214,7 @@ Carpeta src/app (Laravel)
 Copia el archivo .env.example a .env y asegúrate de que la variable DB_HOST coincida con el nombre del servicio de base de datos definido en Docker.
 
 ## 3. Levantar los contenedores
-docker compose up -d
+docker compose up -d (en este punto se ejecuta 00_schema.sql)
 
 ## 4. Instalación de dependencias y configuración de la base de datos
 
@@ -222,9 +222,10 @@ Accede al contenedor de la aplicación y ejecuta la configuración inicial:
 
 docker compose exec app bash
 composer install
-php artisan key:generate
 php artisan migrate
-php artisan app:datos-prueba
+php artisan app:datos-prueba (en este punto se ejecuta 01_seed.sql)
+
+
 
 
 
