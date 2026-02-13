@@ -26,7 +26,7 @@ create table if not exists mensaje (
 
     foreign key (id_asignatura) references asignatura(id)
         on delete cascade
-        on update cascade
+        on update cascade,
     foreign key (id_usuario) references usuario(id)
         on delete cascade
         on update cascade

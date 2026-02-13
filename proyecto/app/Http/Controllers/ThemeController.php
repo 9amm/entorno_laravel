@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\IUsersRepository;
-use App\Repositories\UsersJsonRepository;
+use App\Services\ThemeService;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller {
@@ -20,19 +20,11 @@ class ThemeController extends Controller {
      * lee los datos que se envian en el cuerpo de la peticion POST, valida que cumpan
      * un formato y los guarda.
      */
-    function setTema(Request $peticion, IUsersRepository $repositorioUsuarios) {
+    function setTema(Request $peticion, IUsersRepository $repositorioUsuarios, ThemeService $themeService) {
+        $modoOscuroActivado = $peticion->boolean("modoOscuroActivado");
 
-        $modoOscuroActivado = $peticion->input("modoOscuroActivado", "");
-
-        
-        if ($modoOscuroActivado != "true" && $modoOscuroActivado != "false") {
-            echo("valor no valido");
-        } else {
-            $usuario = $peticion->user();
-            $usuario->setModoOscuroActivado($modoOscuroActivado == "true");
-            $repositorioUsuarios->update($usuario);
-        }
-    
+        $usuario = $peticion->user();
+        $themeService->setTema($modoOscuroActivado, $usuario, $repositorioUsuarios);
     }
 
 }
