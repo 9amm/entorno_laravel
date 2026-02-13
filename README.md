@@ -76,17 +76,48 @@ url()→previous(): cuando un usuario intenta acceder a una parte de la red soci
 
 # Listado de rutas y roles
 
-[Autenticación](https://www.notion.so/2f40929b1d84804f8fd4fa3d5904ae09?pvs=21)
+Autenticación
 
-[Pagina Principal](https://www.notion.so/2f40929b1d84801b8213c6b0e3b5fd9b?pvs=21)
+| Métdo | Ruta      | Descripción                           | Autenticación |
+| ----- | --------- | ------------------------------------- | ------------- |
+| GET   | /login    | Formulario de incio de sesión         | No            |
+| POST  | /login    | Procesar inicio de sesión del usuario | No            |
+| GET   | /register | Formulario de registro                | No            |
+| POST  | /register | Procesar registro del usuario         | No            |
+| POST  | /logout   | Cerrar la sesión del usuario          | Si            |
 
-[Asignaturas](https://www.notion.so/2f40929b1d8480f6bc6cdf84231526c3?pvs=21)
+Página principal
 
-[Mensajes](https://www.notion.so/2f40929b1d8480cd94a6f98368b3d797?pvs=21)
+| Métdo | Ruta | Descripción      | Autenticación | Rol   |
+| ----- | ---- | ---------------- | ------------- | ----- |
+| GET   | /    | Página principal | Si            | Todos |
 
-[Moderación](https://www.notion.so/2f40929b1d848008aa59ed580454bd01?pvs=21)
+Asignaturas
 
-[Tema](https://www.notion.so/2f40929b1d8480318631c2c299b4fdf6?pvs=21)
+| Métdo | Ruta                  | Descripción                       | Autenticación | Rol   |
+| ----- | --------------------- | --------------------------------- | ------------- | ----- |
+| GET   | /subjects             | Listado de todas las asignaturas  | Si            | Todos |
+| GET   | /subjects{asignatura} | Mensajes de asignatura específica | Si            | Todos |
+
+Mensajes
+
+| Métdo | Ruta          | Descripción                       | Autenticación | Rol   |
+| ----- | ------------- | --------------------------------- | ------------- | ----- |
+| POST  | /messages     | Publicar un nuevo mensaje         | Si            | Todos |
+| GET   | /messages/new | Formulario de creación de mensaje | Si            | Todos |
+
+Moderación
+
+| Métdo | Ruta                           | Descripción                             | Autenticación | Rol      |
+| ----- | ------------------------------ | --------------------------------------- | ------------- | -------- |
+| GET   | /moderation                    | Lista de mensajes pendientes de moderar | Si            | Profesor |
+| POST  | /moderation/{mensaje}/{accion} | Aprobar o rechazar                      | Si            | Profesor |
+
+Tema
+
+| Métdo | Ruta   |
+| ----- | ------ |
+| POST  | /theme |
 
 ## Explicación de validación y sanitización implementada.
 
@@ -113,4 +144,5 @@ Clonar el proyecto y situarse en la raiz
 
 
 Ejecutar “docker compose up”
+
 
