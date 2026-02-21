@@ -15,7 +15,7 @@ class LoginController extends Controller {
         return view("login");
     }
 
-    function login(LoginRequest $peticion, LoginService $loginService, ThemeService $themeService) {
+    function login(LoginRequest $peticion, LoginService $loginService) {
         $respuesta = null;
 
         $usuarioLogueado = $loginService->login(

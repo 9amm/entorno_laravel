@@ -6,20 +6,23 @@ use App\Contracts\IUsersRepository;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterService{
-    public function __construct() {
+    protected IUsersRepository $repositorioUsuarios;
+
+    public function __construct(IUsersRepository $repositorioUsuarios) {
+        $this->repositorioUsuarios = $repositorioUsuarios;
     }
     
-    function register($nombreUsuario, $email, $passHasheada, $rol, IUsersRepository $repositorioUsuarios){
+    function register($nombreUsuario, $email, $passHasheada, $rol){
         $mensaje = "";
 
-        $nombreDisponible = $repositorioUsuarios->getByNombre($nombreUsuario) == null;
+        $nombreDisponible = $this->repositorioUsuarios->getByNombre($nombreUsuario) == null;
 
         if($nombreDisponible) {
-            $emailDisponible = $repositorioUsuarios->getByEmail($email) == null;
+            $emailDisponible = $this->repositorioUsuarios->getByEmail($email) == null;
 
             if($emailDisponible) {
                 $nuevoUsuario = new User($nombreUsuario, $email, $passHasheada, $rol);
-                $usuarioInsertado = $repositorioUsuarios->save($nuevoUsuario);
+                $usuarioInsertado = $this->repositorioUsuarios->save($nuevoUsuario);
                 Auth::login($usuarioInsertado);
             } else {
                 $mensaje = "Email no válido";

@@ -15,13 +15,12 @@ class RegisterController extends Controller {
     }
 
 
-    function register(RegisterRequest $peticion, IUsersRepository $repositorioUsuarios, RegisterService $registerService) {
+    function register(RegisterRequest $peticion, RegisterService $registerService) {
         $mensajeError = $registerService->register(
             $peticion->validated("nombre"),
             $peticion->validated("email"),
             $peticion->validated("pass"),
             $peticion->validated("rol"),
-            $repositorioUsuarios
         );
 
         $respuesta = null;
