@@ -17,7 +17,7 @@ class ThemeService {
     }
 
     /**
-     * Devuelve una cookie con el tema que prefiere el usuario
+     * Crear una cookie con el tema que prefiere el usuario
      */
     function crearCookieParaUsuario(User $usuario): void{
         $clave = "modoOscuroActivado";
