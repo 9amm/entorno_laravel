@@ -11,13 +11,24 @@ use App\Services\MessageService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MessageController extends Controller
-{
+class MessageController extends Controller {
+
+    protected IMensajesRepository $repositorioMensajes;
+    protected IAsignaturasRepository $repositorioAsignaturas;
+    protected MessageService $messageService;
+
+    public function __construct( IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas, MessageService $messageService) {
+        $this->repositorioMensajes = $repositorioMensajes;
+        $this->repositorioAsignaturas = $repositorioAsignaturas;
+        $this->messageService = $messageService;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
-    public function index(IMensajesRepository $repositorioMensajes) {
-        $mensajesPublicados = $repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
+    public function index() {
+        $mensajesPublicados = $this->repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
 
         $respuesta = null;
 
@@ -37,9 +48,9 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(IAsignaturasRepository $repositorioAsignaturas): View {
+    public function create(): View {
 
-        $asignaturas = $repositorioAsignaturas->getAll();
+        $asignaturas = $this->repositorioAsignaturas->getAll();
 
         return view("crear_mensaje", [
             "asignaturas" => $asignaturas
@@ -50,18 +61,16 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CrearMensajeRequest $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas, MessageService $messageService) {
-        $datosValidados = $peticion->validated();
-
-        $idAsignatura = $datosValidados["id_asignatura"];
-        $contenidoMensaje = $datosValidados["mensaje"];
+    public function store(CrearMensajeRequest $peticion) {
+        $idAsignatura = $peticion->validated("id_asignatura");
+        $contenidoMensaje = $peticion->validated("mensaje");
 
 
-        $asignatura = $repositorioAsignaturas->getById($idAsignatura);
+        $asignatura = $this->repositorioAsignaturas->getById($idAsignatura);
 
         if($asignatura != null) {
             $usuarioLogeado = $peticion->user();
-            $mensajeCreado = $messageService->guardar($contenidoMensaje, $usuarioLogeado, $asignatura, $repositorioMensajes);
+            $mensajeCreado = $this->messageService->guardar($contenidoMensaje, $usuarioLogeado, $asignatura);
 
             if ($mensajeCreado->tieneEstado(EstadosMensaje::PELIGROSO)) {
                 $textoMostrar = "Hemos detectado que el mensaje contiene 
