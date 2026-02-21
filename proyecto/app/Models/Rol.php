@@ -10,4 +10,9 @@ class Rol {
     */
     public const string ALUMNO = "alumno";
     public const string PROFESOR = "profesor";
+
+    public static function existe(string $rol) {
+        //TODO: fragil
+        return $rol == self::ALUMNO || $rol  == self::PROFESOR;
+    }
 }
