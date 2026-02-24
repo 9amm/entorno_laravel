@@ -12,5 +12,7 @@ interface IAsignaturasRepository {
 
     function save(Asignatura $asignatura): void;
 
+    function delete(int $idAsignatura): bool;
+
 }
 ?>

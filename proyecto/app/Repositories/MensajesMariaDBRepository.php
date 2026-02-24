@@ -31,6 +31,13 @@ class MensajesMariaDBRepository implements IMensajesRepository{
     }
 
 
+    function delete(int $idMensaje): bool {
+        $numFilasBorradas = DB::table("mensaje")->where("id", $idMensaje)->delete();
+
+        return $numFilasBorradas != 0;
+    }
+
+
     function update(Mensaje $mensaje) {
         DB::table("mensaje")
             ->where("id", $mensaje->id)

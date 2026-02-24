@@ -35,6 +35,11 @@ class AsignaturasMariaDBRepository implements IAsignaturasRepository{
         ]);
     }
 
+    function delete(int $idAsignatura): bool {
+        $numFilasBorradas = DB::table("mensaje")->where("id", $idAsignatura)->delete();
+
+        return $numFilasBorradas != 0;
+    }
 
     private function crearAsignatura(stdClass $asignatura): Asignatura {
         return new Asignatura(

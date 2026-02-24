@@ -57,6 +57,11 @@ class UsersMariaDBRepository implements IUsersRepository{
     }
 
 
+    function delete(int $idUsuario): bool {
+        $numFilasBorradas = DB::table("usuario")->where("id", $idUsuario)->delete();
+
+        return $numFilasBorradas != 0;
+    }
 
 
     //TODO: codigo muy parecido

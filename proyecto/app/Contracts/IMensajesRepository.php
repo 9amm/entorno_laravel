@@ -14,6 +14,8 @@ interface IMensajesRepository {
 
     function save(Mensaje $mensaje): void;
 
+    function delete(int $idMensaje): bool;
+
     function update(Mensaje $mensaje);
 
     function getById($id): ?Mensaje;
