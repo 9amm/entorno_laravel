@@ -2,12 +2,12 @@
 namespace App\Models;
 
 use App\Contracts\IMensajesRepository;
-use App\Repositories\MensajesJsonRepository;
 use App\Models\Rol;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\App;
+use Tymon\JWTAuth\Contracts\JWTSubject as JWT;
 
-class User implements Authenticatable{
+class User implements Authenticatable, JWT{
 
     public ?int $id;
 	public string $nombre;
@@ -88,6 +88,16 @@ class User implements Authenticatable{
     }
 
 
+    //JWT
+    public function getJWTIdentifier() {
+        return $this->id;
+    }
+
+    public function getJWTCustomClaims() {
+        return [
+            "rol" => $this->rol
+        ];
+    }
 
 
 
