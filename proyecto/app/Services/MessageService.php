@@ -4,11 +4,15 @@ namespace App\Services;
 
 use App\Contracts\IMensajesRepository;
 use App\Models\Asignatura;
-use App\Models\EstadosMensaje;
 use App\Models\User;
 use App\Models\Mensaje;
 
 class MessageService {
+    protected IMensajesRepository $repoMensajes;
+
+    public function __construct(IMensajesRepository $repoMensajes) {
+        $this->repoMensajes = $repoMensajes;
+    }
 
     /**
      * Crea un nuevo mensaje asociado a un autor y a una asignatura, el mensaje
@@ -19,7 +23,7 @@ class MessageService {
      * @param IMensajesRepository repoMensajes donde se va a guardar el mensaje
      * @see IMensajesRepository
      */
-    public function guardar(string $contenidoMensaje, User $autor, Asignatura $asignatura, IMensajesRepository $repoMensajes): Mensaje {
+    public function guardar(string $contenidoMensaje, User $autor, Asignatura $asignatura): Mensaje {
         $estado = Mensaje::calcularEstadoMensaje($contenidoMensaje);
 
         $mensaje = new Mensaje(
@@ -31,7 +35,7 @@ class MessageService {
         );
 
         //guardamos el mensaje en la bd
-        $repoMensajes->save($mensaje);
+        $this->repoMensajes->save($mensaje);
 
         return $mensaje;
     }

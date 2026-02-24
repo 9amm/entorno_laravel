@@ -16,9 +16,7 @@ class AsignaturasController extends Controller {
 
         $respuesta = null;
 
-        //si no hay asignaturas
         if(sizeof($asinaturas) == 0) {
-            //cargarLayout($usuario, "Mensajes","mensaje_warning.php", ["mensaje" => "Aún no hay ninguna asignatura."]);
             $respuesta = view("error", [
                 "mensaje" => "Aún no hay ninguna asignatura.",
             ]);

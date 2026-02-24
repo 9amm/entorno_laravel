@@ -4,19 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Contracts\IAsignaturasRepository;
 use App\Contracts\IMensajesRepository;
+use App\Http\Requests\CrearMensajeRequest;
 use App\Models\EstadosMensaje;
 use App\Models\Mensaje;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MessageController extends Controller
-{
+class MessageController extends Controller {
+
+    protected IMensajesRepository $repositorioMensajes;
+    protected IAsignaturasRepository $repositorioAsignaturas;
+    protected MessageService $messageService;
+
+    public function __construct( IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas, MessageService $messageService) {
+        $this->repositorioMensajes = $repositorioMensajes;
+        $this->repositorioAsignaturas = $repositorioAsignaturas;
+        $this->messageService = $messageService;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
-    public function index(IMensajesRepository $repositorioMensajes) {
-        $mensajesPublicados = $repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
+    public function index() {
+        $mensajesPublicados = $this->repositorioMensajes->getByEstado(EstadosMensaje::PUBLICADO);
 
         $respuesta = null;
 
@@ -36,9 +48,9 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(IAsignaturasRepository $repositorioAsignaturas): View {
+    public function create(): View {
 
-        $asignaturas = $repositorioAsignaturas->getAll();
+        $asignaturas = $this->repositorioAsignaturas->getAll();
 
         return view("crear_mensaje", [
             "asignaturas" => $asignaturas
@@ -49,47 +61,32 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $peticion, IMensajesRepository $repositorioMensajes, IAsignaturasRepository $repositorioAsignaturas, MessageService $messageService) {
+    public function store(CrearMensajeRequest $peticion) {
+        $idAsignatura = $peticion->validated("id_asignatura");
+        $contenidoMensaje = $peticion->validated("mensaje");
 
-        $usuarioLogeado = $peticion->user();
 
-        $respuesta = null;
+        $asignatura = $this->repositorioAsignaturas->getById($idAsignatura);
 
-        $idAsignatura = $peticion->input("id_asignatura", "");
-        $contenidoMensaje = $peticion->input("mensaje", "");
+        if($asignatura != null) {
+            $usuarioLogeado = $peticion->user();
+            $mensajeCreado = $this->messageService->guardar($contenidoMensaje, $usuarioLogeado, $asignatura);
 
-        if (empty($idAsignatura) || empty($contenidoMensaje)) {
-            $respuesta = view("error", [ "mensaje" => "Todos los campos son obligatorios."]);
+            if ($mensajeCreado->tieneEstado(EstadosMensaje::PELIGROSO)) {
+                $textoMostrar = "Hemos detectado que el mensaje contiene 
+                            palabras vetadas, el mensaje queda pendiente de revisión
+                            por parte de un moderador.";
 
-        } else if(!Mensaje::tieneLongitudValida($contenidoMensaje)) {
-            $respuesta = view("error", [ "mensaje" => "Longitud del mensaje no valida."]);
-
-        } else {
-            $asignatura = $repositorioAsignaturas->getById($idAsignatura);
-
-            if($asignatura != null) {
-                $mensajeCreado = $messageService->guardar($contenidoMensaje,$usuarioLogeado, $asignatura, $repositorioMensajes);
-
-                if($mensajeCreado->tieneEstado(EstadosMensaje::PELIGROSO)) {
-                    $mensajeAlerta = "Hemos detectado que el mensaje contiene 
-                        palabras vetadas, el mensaje queda pendiente de revisión
-                        por parte de un moderador.";
-                } else if($mensajeCreado->tieneEstado(EstadosMensaje::PENDIENTE)){
-                    $mensajeAlerta = "Mensaje creado correctamente, queda pendiente de moderar.";
-                }
-
-                $respuesta = view("error", [
-                    "mensaje" => $mensajeAlerta,
-                ]);
-
-            } else {
-                $respuesta = view("error", [
-                    "mensaje" => "Asignatura no encontrada.",
-                ]);
+            } else if($mensajeCreado->tieneEstado(EstadosMensaje::PENDIENTE)) {
+                $textoMostrar = "Mensaje creado correctamente, queda pendiente de moderar.";
             }
+        } else {
+            $textoMostrar = "No se ha podido encontrar la asignatura.";
         }
 
-        return $respuesta;
+        return view("error", [
+            "mensaje" => $textoMostrar
+        ]);
     }
 
     /**

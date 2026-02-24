@@ -20,11 +20,11 @@ class ThemeController extends Controller {
      * lee los datos que se envian en el cuerpo de la peticion POST, valida que cumpan
      * un formato y los guarda.
      */
-    function setTema(Request $peticion, IUsersRepository $repositorioUsuarios, ThemeService $themeService) {
+    function setTema(Request $peticion, ThemeService $themeService) {
         $modoOscuroActivado = $peticion->boolean("modoOscuroActivado");
 
         $usuario = $peticion->user();
-        $themeService->setTema($modoOscuroActivado, $usuario, $repositorioUsuarios);
+        $themeService->setTema($modoOscuroActivado, $usuario);
     }
 
 }
