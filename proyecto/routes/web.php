@@ -34,14 +34,14 @@ Route::post('/messages', [MessageController::class, "store"])
 Route::get('/moderation', [ModeracionController::class, "index"])
     ->name("mensaje_pendientes_moderar")
     ->middleware("auth")
-    ->middleware(NecesitaRol::class . ":" .Rol::PROFESOR);
+    ->middleware("necesita_rol:web," .Rol::PROFESOR);
 
 
 Route::post('/moderation/{mensaje}/{accion}', [ModeracionController::class, "moderar"])
     ->name("mensaje_moderar")
     ->whereIn('accion', ['approve', 'reject'])
     ->middleware("auth")
-    ->middleware(NecesitaRol::class . ":" .Rol::PROFESOR);
+    ->middleware("necesita_rol:web," .Rol::PROFESOR);
 
 
 

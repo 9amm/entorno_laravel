@@ -1,12 +1,15 @@
 <?php
 
 use App\Contracts\IMensajesRepository;
+use App\Http\Middleware\NecesitaRol;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Middleware\TokenJWTValido;
 use App\Http\Requests\RegisterApiRequest;
+use App\Http\Requests\LoginApiRequest;
 use App\Services\RegisterService;
+use App\Models\Rol;
 
 Route::get("/users/me", function(Request $peticion) {
     $usuario = auth("api")->user();
@@ -48,7 +51,8 @@ Route::post("/auth/register", function(RegisterApiRequest $peticion, RegisterSer
         $nombre,
         $email,
         $passHasheada,
-        $rol
+        $rol,
+        Auth::guard("api")
     );
 
     $respuesta = null;
@@ -58,8 +62,12 @@ Route::post("/auth/register", function(RegisterApiRequest $peticion, RegisterSer
             "message" => $mensaje
         ], 400);
     } else {
+        $usuario = auth("api")->user();
+        $token = Auth::guard("api")->login($usuario);
+
         $respuesta = response()->json([
-            "message" => "ok"
+            "message" => "ok",
+            "token" => $token
         ], 201);
     }
 
@@ -68,7 +76,7 @@ Route::post("/auth/register", function(RegisterApiRequest $peticion, RegisterSer
 
 
 
-Route::post("auth/login", function(Request $request) {
+Route::post("auth/login", function(LoginApiRequest $request) {
     $nombreUsuario = $request->input("usuario");
     $passHasheada = $request->input("pass");
 
