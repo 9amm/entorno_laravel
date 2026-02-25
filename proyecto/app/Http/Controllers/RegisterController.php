@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\IUsersRepository;
 use App\Http\Requests\RegisterRequest;
 use App\Services\RegisterService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 
@@ -21,6 +22,7 @@ class RegisterController extends Controller {
             $peticion->validated("email"),
             $peticion->validated("pass"),
             $peticion->validated("rol"),
+            Auth::guard()
         );
 
         $respuesta = null;
