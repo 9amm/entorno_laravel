@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\NecesitaRol;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn (Request $request) => route('login_formulario'));
         $middleware->redirectUsersTo(fn (Request $request) => route('inicio'));
 
+        $middleware->alias([
+            "necesita_rol" => NecesitaRol::class,
+        ]);
 
         $middleware->web(remove: [
             ValidateCsrfToken::class
