@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Middleware\TokenJWTValido;
+use App\Http\Requests\RegisterApiRequest;
 use App\Services\RegisterService;
 
 Route::get("/users/me", function(Request $peticion) {
@@ -36,11 +37,12 @@ Route::get("/messages/{id}", function($id) {
 
 })->whereNumber("id");
 
-Route::post("/auth/register", function(Request $peticion, RegisterService $registerService) {
-    $nombre = $peticion->input("nombre");
-    $email = $peticion->input("email");
-    $passHasheada = $peticion->input("pass");
-    $rol = $peticion->input("rol");
+Route::post("/auth/register", function(RegisterApiRequest $peticion, RegisterService $registerService) {
+
+    $nombre = $peticion->validated("nombre");
+    $email = $peticion->validated("email");
+    $passHasheada = $peticion->validated("pass");
+    $rol = $peticion->validated("rol");
 
     $mensaje = $registerService->register(
         $nombre,
